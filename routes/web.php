@@ -51,3 +51,5 @@ Route::get('/borrowings/{id}/devolucion', 'BorrowingController@devolucion');
 Route::resource('/supports', 'SupportController');
 Route::get('/supports/{id}/confirmDelete', 'SupportController@confirmDelete');
 Route::get('/supports/{id}/retorno', 'SupportController@retorno');
+
+Route::resource('/attendance', 'AttendanceController');

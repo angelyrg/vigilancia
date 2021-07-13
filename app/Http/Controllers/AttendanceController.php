@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -11,9 +12,11 @@ class AttendanceController extends Controller
     {
         //$request->user()->authorizeRoles(['admin', 'vigilante']);
 
-        $attendances = Attendance::paginate(10);
+        $attendances = Attendance::where('user_id', Auth::user()->id)->paginate(10);
 
-        return view('attendance.index',compact('attendances'));
+        // $attendances = $attendances::paginate(10);
+
+        return view('attendance.index', compact('attendances'));
     }
 
 
@@ -28,25 +31,30 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'dni' => 'required|numeric|digits:8|unique:users',
+            'dni' => 'required|numeric|digits:8',
         ]);
 
         $attendance = new Attendance();
-        
+        $attendance->dia_semana = date('w');
+        $attendance->estado = 0;
+        $attendance->user_id = Auth::user()->id;
         $attendance->save();
         
-        
         return redirect('/attendance');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        return view('attendance.edit', ['attendance'=>Attendance::findOrFail($id)]);
     }
 
     public function update(Request $request, Attendance $attendance)
     {
         $validatedData = $request->validate([
-
-            'dni' => 'required|numeric|digits:8|unique:users',
+            'dni' => 'required|numeric|digits:8',
         ]);
-        
-        $attendance->name = $validatedData['name'];
+
+        $attendance->estado = 1;
 
         $attendance->save();
         
