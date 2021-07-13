@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{$attendance->created_at}}</td>
                                 <td>{{$attendance->updated_at}}</td>
-                                <td>{{$attendance->dia_semana}}</td>
+                                <td>{{$dias[$attendance->dia_semana]}}</td>
                                 <td>
                                     <span class="label label-info">{{$attendance->estado}}</span>
                                 </td>

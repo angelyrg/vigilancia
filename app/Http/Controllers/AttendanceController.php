@@ -13,10 +13,11 @@ class AttendanceController extends Controller
         //$request->user()->authorizeRoles(['admin', 'vigilante']);
 
         $attendances = Attendance::where('user_id', Auth::user()->id)->paginate(10);
+        $dias = array("domingo","lunes","martes","miércoles","jueves","viernes","sábado");
 
         // $attendances = $attendances::paginate(10);
 
-        return view('attendance.index', compact('attendances'));
+        return view('attendance.index', compact('attendances', 'dias'));
     }
 
 
@@ -51,6 +52,7 @@ class AttendanceController extends Controller
     public function update(Request $request, Attendance $attendance)
     {
         $validatedData = $request->validate([
+
             'dni' => 'required|numeric|digits:8',
         ]);
 
