@@ -1,0 +1,67 @@
+@extends('layouts.adminlte')
+
+@section('content')
+<div class="container">
+
+    <h3>Gestión de registros de apoyo</h3>
+    <hr>
+    <div class="row">        
+        <a href="/supports/create" class="btn btn-primary">Nuevo</a>
+    </div>
+
+    <div class="box">
+
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-hover" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Vigilante</th>
+                            <th>Oficina</th>
+                            <th>Documento</th>
+                            <th>Destino</th>
+                            <th>Fecha de registro</th>
+                            <th>Retorno</th>
+
+                            <th>Estado</th>
+                            <th colspan="2">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($supports as $support)
+                            <tr>
+                                <td>{{$support->vigilante->name." ".$support->vigilante->lastname}}</td>
+                                <td>{{$support->oficina}}</td>
+                                <td>{{$support->documento}}</td>
+                                <td>{{$support->destino}}</td>
+                                <td>{{$support->created_at}}</td>
+                                <td>{{$support->fecha_retorno}}</td>
+
+                                <td>
+                                    @if ($support->estado == 0)
+                                        <a href="/supports/{{$support->id}}/retorno" class="btn btn-success btn-sm">Marcar retorno</a>                                  
+                                    @else
+                                        <span class="label label-success">Retornó</span>                                          
+                                    @endif
+                                </td>
+                                <td><a href="/supports/{{$support->id}}/edit" class="btn btn-warning btn-sm">Editar</a></td>
+                                <td><a href="/supports/{{$support->id}}/confirmDelete" class="btn btn-danger btn-sm">Eliminar</a></td>                    
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>   
+            </div>
+        </div>
+
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                {!! $supports->render() !!}
+            </ul>
+        </div>
+
+
+
+</div>
+@endsection
