@@ -22,7 +22,7 @@ class HorarioController extends Controller
         
         $vigilantes = User::all()->where('role_id', 2);
 
-        $horarios = Horario::paginate(10);
+        $horarios = Horario::orderByDesc("id")->paginate(10);
 
         return view("horario.index", ["horarios" => $horarios, 'dias'=>$dias, 'vigilantes' => $vigilantes]);
 

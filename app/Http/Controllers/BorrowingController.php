@@ -15,7 +15,7 @@ class BorrowingController extends Controller
      */
     public function index()
     {
-        $borrowings = Borrowing::paginate(10);
+        $borrowings = Borrowing::orderByDesc("id")->paginate(10);
         return view('borrowings.index', compact('borrowings'));
     }
 

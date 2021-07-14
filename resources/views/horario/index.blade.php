@@ -4,12 +4,11 @@
 <div class="container">
 
     <h3>Gestión de Horarios</h3>
-    <div class="row">        
-        <a href="/horario/create" class="btn btn-primary">Nuevo</a>
-    </div>
     <hr>
 
-
+    <div class="container row text-right">        
+        <a href="/horario/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
+    </div>
 
     <div class="box">
         <div class="box-header with-border">
@@ -37,7 +36,7 @@
                             <td>{{ date("g:i a",strtotime($horario->hora_final)) }}</td>
                             <td></td>
                             {{-- <td><a href="/horario/{{$horario->id}}/edit" class="btn btn-warning">Editar</a></td> --}}
-                            <td><a href="/horario/{{$horario->id}}/confirmDelete" class="btn btn-danger">Eliminar</a></td>
+                            <td><a href="/horario/{{$horario->id}}/confirmDelete" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                         </tr>
                             
                         @endforeach

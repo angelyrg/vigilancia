@@ -5,8 +5,8 @@
 
     <h3>Gestión de registros de docentes</h3>
     <hr>
-    <div class="row">        
-        <a href="/teachers/create" class="btn btn-primary">Nuevo</a>
+    <div class="container row text-right">        
+        <a href="/teachers/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
     <div class="box">
@@ -43,8 +43,8 @@
                                         <span class="label label-success">Salió</span>                                          
                                     @endif
                                 </td>
-                                <td><a href="/teachers/{{$teacher->id}}/edit" class="btn btn-warning btn-sm">Editar</a></td>
-                                <td><a href="/teachers/{{$teacher->id}}/confirmDelete" class="btn btn-danger btn-sm">Eliminar</a></td>                    
+                                <td><a href="/teachers/{{$teacher->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="/teachers/{{$teacher->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>
                         @endforeach
                     </tbody>

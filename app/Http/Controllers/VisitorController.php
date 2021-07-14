@@ -15,7 +15,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitors = Visitor::paginate(10);
+        $visitors = Visitor::orderByDesc("id")->paginate(10);
         return view('visitors.index', compact('visitors'));
     }
 

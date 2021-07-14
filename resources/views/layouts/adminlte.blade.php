@@ -25,12 +25,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset("adminlte/css/AdminLTE.min.css") }}">
 
-
     <link rel="stylesheet" href="{{ asset("adminlte/css/skins/skin-blue.min.css") }}">
-
 
     <!-- Google Font -->
     <link rel="stylesheet" href="{{ asset("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic") }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -98,10 +100,8 @@ desired effect
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        <li class="nav-item">
-                            {{-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
-                        </li>
-                    @else
+
+                    {{-- @else
                         <li class="nav-item dropdown">
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -109,7 +109,7 @@ desired effect
                                     @csrf
                                 </form>
                             </div>
-                        </li>
+                        </li> --}}
                     @endguest
 
 
@@ -131,7 +131,7 @@ desired effect
 
                             <div class="btn btn-flat btn-danger">
                               <i class="fa fa-sign-out" aria-hidden="true"></i>
-                              <a href="{{ route('logout') }}" class="text-white" onclick="event.preventDefault();
+                              <a  class="text-white" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                                   {{ __('Cerrar sesión') }}
                               </a>
@@ -197,7 +197,7 @@ desired effect
         <li class="header">MENÚ</li>
 
         <li class="treeview">
-          <a href="#"><i class="fa fa-users"></i> <span>Control</span>
+          <a href="#"><i class="fa fa-users"></i> <span>Control personas</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -263,6 +263,8 @@ desired effect
 <script src="{{ asset("adminlte/bootstrap/dist/js/bootstrap.min.js") }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset("adminlte/js/adminlte.min.js") }}"></script>
+
+
 
 </body>
 </html>

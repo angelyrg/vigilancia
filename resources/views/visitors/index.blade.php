@@ -41,8 +41,8 @@
                                         <span class="label label-success">Salió</span>                                          
                                     @endif
                                 </td>
-                                <td><a href="/visitors/{{$visitor->id}}/edit" class="btn btn-warning btn-sm">Editar</a></td>
-                                <td><a href="/visitors/{{$visitor->id}}/confirmDelete" class="btn btn-danger btn-sm">Eliminar</a></td>                    
+                                <td><a href="/visitors/{{$visitor->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="/visitors/{{$visitor->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>
                         @endforeach
                     </tbody>

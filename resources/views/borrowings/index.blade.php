@@ -5,8 +5,8 @@
 
     <h3>Gestión de registros de Préstamos</h3>
     <hr>
-    <div class="row">        
-        <a href="/borrowings/create" class="btn btn-primary">Nuevo</a>
+    <div class="container row text-right">        
+        <a href="/borrowings/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
     <div class="box">
@@ -44,8 +44,8 @@
                                     @endif
                                 </td>
 
-                                <td><a href="/borrowings/{{$borrowing->id}}/edit" class="btn btn-warning btn-sm">Editar</a></td>
-                                <td><a href="/borrowings/{{$borrowing->id}}/confirmDelete" class="btn btn-danger btn-sm">Eliminar</a></td>                    
+                                <td><a href="/borrowings/{{$borrowing->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="/borrowings/{{$borrowing->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>
                         @endforeach
                     </tbody>

@@ -5,8 +5,8 @@
 
     <h3>Gestión de registros de Administrativos</h3>
     <hr>
-    <div class="row">        
-        <a href="/administrative/create" class="btn btn-primary">Nuevo</a>
+    <div class="container row text-right">        
+        <a href="/administrative/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
     <div class="box">
@@ -45,8 +45,8 @@
                                         <span class="label label-success">Salió</span>                                          
                                     @endif
                                 </td>
-                                <td><a href="/administrative/{{$item->id}}/edit" class="btn btn-warning btn-sm">Editar</a></td>
-                                <td><a href="/administrative/{{$item->id}}/confirmDelete" class="btn btn-danger btn-sm">Eliminar</a></td>                    
+                                <td><a href="/administrative/{{$item->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="/administrative/{{$item->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>
                         @endforeach
                     </tbody>

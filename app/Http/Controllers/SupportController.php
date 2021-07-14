@@ -16,7 +16,7 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $supports = Support::paginate(10);
+        $supports = Support::orderByDesc("id")->paginate(10);
         $vigilantes = User::all()->where('role_id', 2);
         return view('supports.index', ['supports'=>$supports, 'vigilantes'=>$vigilantes]);
     }

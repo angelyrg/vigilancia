@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $request->user()->authorizeRoles('admin');
 
-        $users = User::paginate(10);
+        $users = User::orderByDesc("id")->paginate(10);
 
         return view('user.index', ['users' => $users]);
     }

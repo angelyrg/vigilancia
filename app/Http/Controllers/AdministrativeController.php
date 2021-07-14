@@ -15,7 +15,7 @@ class AdministrativeController extends Controller
      */
     public function index()
     {
-        $administrative = Administrative::paginate(10);
+        $administrative = Administrative::orderByDesc("id")->paginate(10);
         return view('administrative.index', compact('administrative'));
     }
 
