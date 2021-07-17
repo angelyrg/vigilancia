@@ -7,35 +7,34 @@
     <hr>
     <div class="container">
 
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">{{ __('Confirmar eliminar usuario') }}</div>
+        <div class="col-md-8 col-md-offset-2">
+            <form method="POST" action="/user/{{$user->id}}" aria-label="{{ __('Confirmar eliminar registro de incidente') }}">
+                @csrf
+                @method('delete')
 
-                <div class="card-body">
-                    <form method="POST" action="/user/{{$user->id}}" aria-label="{{ __('Confirmar eliminar usuario') }}">
-                        @csrf
-                        @method('delete')
-
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ __('Confirmar eliminar usuario') }}</h3>
+                    </div>
+                    <div class="box-body">
                         <div class="form-group row">
-
                             <div class="col-md-12">
-                                <h3 class="text-center">¿Estás seguro de eliminar el usuario {{$user->name}}?</h3>
-                                
+                                <h3 class="text-center">¿Estás seguro de eliminar al usuario {{$user->name}}?</h3>
                             </div>
-                        </div>
-                       
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Eliminar') }}
+                        </div>                        
+                    </div>
+                    <div class="box-footer">
+                        <div class="form-group text-right">
+                            <div class="col ">
+                                <a href="/user" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i> {{ __('Eliminar') }}
                                 </button>
-                                <a href="/user" class="btn btn-default">Cancelar</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
     </div>

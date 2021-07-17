@@ -7,7 +7,7 @@
     <hr>
     <div class="container">
 
-        <div class="col-md-8">
+        <div class="col-md-6 col-md-offset-3">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Datos del usuario</h3>
@@ -105,12 +105,12 @@
                             </div>
                         </div>                        
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group">
+                            <div class="col text-right">
+                                <a href="/user" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Guardar') }}
+                                    <i class="fa fa-save"></i> Guardar
                                 </button>
-                                <a href="/user" class="btn btn-default">Cancelar</a>
                             </div>
                         </div>
                     </form>

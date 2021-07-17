@@ -14,55 +14,55 @@
                 
                 <div class="box-body">
 
-                    <div class="form-group ">
+                    <div class="form-group {{ $errors->has('nombres') ? 'has-error' : '' }}">
                         <label for="nombres" >{{ __('Nombres') }}</label>
 
                         <div >
-                            <input id="nombres" type="text" class="form-control{{ $errors->has('nombres') ? ' is-invalid' : '' }}" name="nombres" value="@if(!old('nombres')){{$administrative->nombres}}@else{{old('nombres')}}@endif" required autofocus>
+                            <input id="nombres" type="text" class="form-control" name="nombres" value="@if(!old('nombres')){{$administrative->nombres}}@else{{old('nombres')}}@endif" required autofocus>
 
                             @if ($errors->has('nombres'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('nombres') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group ">
+                    <div class="form-group {{ $errors->has('apellidos') ? 'has-error' : '' }}">
                         <label for="apellidos" >{{ __('Apellidos') }}</label>
 
                         <div >
-                            <input id="apellidos" type="text" class="form-control{{ $errors->has('apellidos') ? ' is-invalid' : '' }}" name="apellidos" value="@if(!old('apellidos')){{$administrative->apellidos}}@else{{old('apellidos')}}@endif" required >
+                            <input id="apellidos" type="text" class="form-control" name="apellidos" value="@if(!old('apellidos')){{$administrative->apellidos}}@else{{old('apellidos')}}@endif" required >
 
                             @if ($errors->has('apellidos'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('apellidos') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group ">
+                    <div class="form-group {{ $errors->has('dni') ? 'has-error' : '' }}">
                         <label for="dni" >{{ __('DNI') }}</label>
 
                         <div >
-                            <input id="dni" type="text" class="form-control{{ $errors->has('dni') ? ' is-invalid' : '' }}" name="dni" value="@if(!old('dni')){{$administrative->dni}}@else{{old('dni')}}@endif" required maxlength="8" pattern="[0-9]{8}" title="Ingrese un número de DNI correcto">
+                            <input id="dni" type="text" class="form-control" name="dni" value="@if(!old('dni')){{$administrative->dni}}@else{{old('dni')}}@endif" required maxlength="8" pattern="[0-9]{8}" title="Ingrese un número de DNI correcto">
 
                             @if ($errors->has('dni'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('dni') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group ">
+                    <div class="form-group {{ $errors->has('descripcion') ? 'has-error' : '' }}">
                         <label for="descripcion" >{{ __('Descripción') }}</label>
 
                         <div >
-                            <textarea cols="30" rows="4" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" name="descripcion" required>@if(!old('descripcion')){{$administrative->descripcion}}@else{{old('descripcion')}}@endif</textarea>
+                            <textarea cols="30" rows="4" class="form-control" name="descripcion" required>@if(!old('descripcion')){{$administrative->descripcion}}@else{{old('descripcion')}}@endif</textarea>
                             @if ($errors->has('descripcion'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('descripcion') }}</strong>
                                 </span>
                             @endif
@@ -74,11 +74,11 @@
 
                 <div class="box-footer">
                     <div class="form-group">
-                        <div class="col-md-6 offset-md-4">
+                        <div class="col text-right">
+                            <a href="/administrative" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Guardar') }}
+                                <i class="fa fa-save"></i> {{ __('Guardar') }}
                             </button>
-                            <a href="/administrative" class="btn btn-default">Cancelar</a>
                         </div>
                     </div>
                 </div>

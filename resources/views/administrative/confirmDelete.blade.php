@@ -7,38 +7,34 @@
     <hr>
     <div class="container">
 
-        <div class="col-md-8 offset-md-2">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{ __('Confirmar eliminar registro') }}</h3>
-                </div>
+        <div class="col-md-8 col-md-offset-2">
+            <form method="POST" action="/administrative/{{$administrative->id}}" >
+                @csrf
+                @method('delete')
 
-                <div class="box-body">
-                    <form method="POST" action="/administrative/{{$administrative->id}}" aria-label="{{ __('Confirmar eliminar registro de administrativo') }}">
-                        @csrf
-                        @method('delete')
-
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ __('Confirmar eliminar registro') }}</h3>
+                    </div>
+                    <div class="box-body">
                         <div class="form-group row">
-
                             <div class="col-md-12">
                                 <h3 class="text-center">¿Estás seguro de eliminar el registro?</h3>
-                                
                             </div>
-                        </div>
-                       
-
-                        <div class="form-group row mb-0 text-right">
-                            <div class="col-md-6 col-md-offset-4 ">
-                                <a href="/administrative" class="btn btn-default">Cancelar</a>
+                        </div>                        
+                    </div>
+                    <div class="box-footer">
+                        <div class="form-group text-right">
+                            <div class="col ">
+                                <a href="/administrative" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                                 <button type="submit" class="btn btn-danger">
-                                    {{ __('Eliminar') }}
+                                    <i class="fa fa-trash"></i> {{ __('Eliminar') }}
                                 </button>
                             </div>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
     </div>

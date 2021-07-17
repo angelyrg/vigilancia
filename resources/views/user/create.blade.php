@@ -126,11 +126,11 @@
     
                     <div class="box-footer">
                         <div class="form-group">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col text-right">
+                                <a href="/user" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Guardar') }}
+                                    <i class="fa fa-save"></i> {{ __('Guardar') }}
                                 </button>
-                                <a href="/user" class="btn btn-default">Cancelar</a>
                             </div>
                         </div>
                     </div>

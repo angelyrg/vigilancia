@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
 
-    <h3>Gestión de registros de Visitantes</h3>
+    <h4>Gestión de registros de Visitantes</h4>
     <hr>
-    <div class="row">        
-        <a href="/visitors/create" class="btn btn-primary">Nuevo</a>
+    <div class="container row text-right">        
+        <a href="/visitors/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
     <div class="box">
