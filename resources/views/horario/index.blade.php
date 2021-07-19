@@ -29,7 +29,7 @@
                     <tbody>
                         @foreach ($horarios as $horario)
                         <tr>
-                            <td>{{ $vigilantes->find($horario->user_id)->name." ".$vigilantes->find($horario->user_id)->lastname }}</td>
+                            <td>{{ $vigilantes->find($horario->user_id)->name." ".$vigilantes->find($horario->user_id)->lastname}}</td>
                             <td>{{ $dias[$horario->dia_semana_inicio] }}</td>
                             <td>{{ date("g:i a",strtotime($horario->hora_inicio)) }}</td>
                             <td>{{ $dias[$horario->dia_semana_fin] }}</td>

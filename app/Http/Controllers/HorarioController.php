@@ -121,10 +121,10 @@ class HorarioController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['admin']);
+        //$request->user()->authorizeRoles(['admin']);
 
-        $user = User::findOrFail($id);
-        $user->delete();
+        $horario = Horario::findOrFail($id);
+        $horario->delete();
         return redirect('/horario');
     }
 

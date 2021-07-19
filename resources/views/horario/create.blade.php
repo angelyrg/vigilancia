@@ -4,7 +4,7 @@
 <div class="container">
 
 
-    <div class="container d-flex justify-content-center col-md-6">
+    <div class="container  col-md-6 col-md-offset-3">
 
 
                 <div class="box box-primary ">
@@ -24,7 +24,7 @@
 
                                 <div class="">
                                     <select name="user_id" id="user_id" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" required> 
-                                        <option value=""></option>
+                                        <option value="">--Seleccione vigilate--</option>
                                         @foreach ($vigilantes as $vigilante)
                                             <option value="{{$vigilante->id}}">{{$vigilante->name." ".$vigilante->lastname}}</option>
                                         @endforeach
@@ -39,9 +39,11 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="dia_semana_inicio" >{{ __('Día de inicio') }}</label>
+                                <div class="col">
+                                    <label for="dia_semana_inicio" >{{ __('Inicio del turno') }}</label>
+                                </div>
 
-                                <div class="">
+                                <div class="col-md-6">
                                     <select name="dia_semana_inicio" id="dia_semana_inicio" class="form-control{{ $errors->has('dia_semana_inicio') ? ' is-invalid' : '' }}" required> 
                                         <option value="">-Inicio-</option>
                                         <option value="1">Lunes</option>
@@ -59,12 +61,8 @@
                                         </span>
                                     @endif
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="hora_inicio" >{{ __('Hora de inicio') }}</label>
-
-                                <div class="">
+                                <div class="col-md-6">
                                     <input id="hora_inicio" type="time" class="form-control{{ $errors->has('hora_inicio') ? ' is-invalid' : '' }}" name="hora_inicio" value="{{ old('hora_inicio') }}" required >
 
                                     @if ($errors->has('hora_inicio'))
@@ -74,13 +72,17 @@
                                     @endif
                                 </div>
                             </div>
+                            <br>
+                            <br>
 
-                            <div class="form-group ">
-                                <label for="dia_semana_fin" >{{ __('Día de finalización') }}</label>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="dia_semana_fin" >{{ __('Fin del turno') }}</label>
+                                </div>
 
-                                <div class="">
+                                <div class="col-md-6">
                                     <select name="dia_semana_fin" id="dia_semana_fin" class="form-control{{ $errors->has('dia_semana_fin') ? ' is-invalid' : '' }}" required> 
-                                        <option value="">-Finalización-</option>
+                                        <option value="">--Día--</option>
                                         <option value="1">Lunes</option>
                                         <option value="2">Martes</option>
                                         <option value="3">Miércoles</option>
@@ -96,13 +98,8 @@
                                         </span>
                                     @endif
                                 </div>
-                            </div>                           
 
-
-                            <div class="form-group ">
-                                <label for="hora_final" >{{ __('Hora de finalización') }}</label>
-
-                                <div class="">
+                                <div class="col-md-6">
                                     <input id="hora_final" type="time" class="form-control{{ $errors->has('hora_final') ? ' is-invalid' : '' }}" name="hora_final" value="{{ old('hora_final') }}" required >
 
                                     @if ($errors->has('hora_final'))
@@ -111,21 +108,24 @@
                                         </span>
                                     @endif
                                 </div>
-                            </div>
+
+                            </div>                           
+
+
 
                         </div>
                         
                         <div class="box-footer">
-                            <div class="form-group ">
-                                <div class="col-md-6 offset-md-4">
+                            <div class="form-group">
+                                <div class="col text-right">
+                                    <a href="/horario" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Guardar') }}
+                                        <i class="fa fa-save"></i> {{ __('Guardar') }}
                                     </button>
-                                    <a href="/horario" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </div>
-                        </div>      
-                                              
+                        </div>
+                                                      
                     </form>
                     
 

@@ -8,14 +8,14 @@
 
 
     <div class="col-md-6 col-md-offset-3">
-        <form method="POST" action="/user/{{$horario->id}}" aria-label="{{ __('Confirmar eliminar horario') }}">
+        <form method="POST" action="/horario/{{$horario->id}}" >
+            @csrf
+            @method('delete')
             <div class="panel panel-danger">
-                <div class="panel-heading"><h5><b>Confirmar eliminar</b></h5></div>
+
+                <div class="panel-heading"><h5><b>Confirmar eliminar horario</b></h5></div>
 
                 <div class="panel-body">
-                    @csrf
-                    @method('delete')
-
                     <div class="form-group row">
                         <div class="col-md-12">
                             <h3 class="text-center">¿Estás seguro de eliminar el turno?</h3>                                
@@ -24,9 +24,9 @@
                 </div>
 
                 <div class="panel-footer text-right">
-                    <a href="/horario" class="btn btn-secondary">Cancelar</a>
+                    <a href="/horario" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                     <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-remove"></i>
+                        <i class="fa fa-trash"></i>
                         {{ __('Eliminar') }}
                     </button>
                 </div>    
