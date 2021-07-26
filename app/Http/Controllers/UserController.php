@@ -9,6 +9,11 @@ use App\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authAdmin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +21,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles('admin');
-
         $users = User::orderByDesc("id")->paginate(10);
 
         return view('user.index', ['users' => $users]);
@@ -30,7 +33,6 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles('admin');
 
         return view('user.create');
     }
@@ -127,7 +129,6 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['admin']);
 
         $user = User::findOrFail($id);
         $user->delete();

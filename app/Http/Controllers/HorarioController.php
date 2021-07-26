@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,11 +24,11 @@ class HorarioController extends Controller
     {
         //$day=date('w', strtotime(today()));
 
-        $dias = array("1"  => "Lunes","2"  => "Martes","3"  => "Miércoles","4"  => "Jueves","5"  => "Viernes","6"  => "Sábado","7"  => "Domingo");
+        $dias = array("0"  => "Domingo","1"  => "Lunes","2"  => "Martes","3"  => "Miércoles","4"  => "Jueves","5"  => "Viernes","6"  => "Sábado");
         
         $vigilantes = User::all()->where('role_id', 2);
 
-        $horarios = Horario::orderByDesc("id")->paginate(10);
+        $horarios = Horario::orderBy("dia_semana_inicio")->paginate(10);
 
         return view("horario.index", ["horarios" => $horarios, 'dias'=>$dias, 'vigilantes' => $vigilantes]);
 
@@ -40,11 +46,12 @@ class HorarioController extends Controller
      */
     public function create()
     {
+        $horarios = Horario::all();
         $vigilantes = User::all()->where('role_id', 2);
 
         //return $vigilantes;
 
-        return view("horario.create", ["vigilantes" => $vigilantes]);
+        return view("horario.create", ["vigilantes" => $vigilantes, "horarios" => $horarios]);
 
     }
 
@@ -121,7 +128,6 @@ class HorarioController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        //$request->user()->authorizeRoles(['admin']);
 
         $horario = Horario::findOrFail($id);
         $horario->delete();

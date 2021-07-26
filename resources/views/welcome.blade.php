@@ -63,7 +63,8 @@
                 margin-bottom: 30px;
             }
         </style>
-    </head>
+
+</head>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -92,7 +93,7 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Iniciar sesión</a>
-                        {{-- <a href="{{ route('register') }}">Register</a> --}}
+                        
                     @endauth
 
                 </div>
@@ -102,17 +103,7 @@
 </html>
 
 
-@section('scripts')
-<script>
 
-    $(document).ready(function(){
-
-        console.log("Hola mundo");
-
-    });
-                        
-</script>
-@endsection
 
 
 

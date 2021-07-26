@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('authAdmin');
+    }
+
+
     public function index(Request $request)
     {
-        //$request->user()->authorizeRoles(['admin', 'vigilante']);
 
         $attendances = Attendance::where('user_id', Auth::user()->id)->paginate(10);
         $dias = array("domingo","lunes","martes","miércoles","jueves","viernes","sábado");
@@ -23,8 +29,6 @@ class AttendanceController extends Controller
 
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'vigilante']);
-
         return view('attendance.create');
     }
 

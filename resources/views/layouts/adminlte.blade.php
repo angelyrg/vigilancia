@@ -34,26 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -91,27 +72,9 @@ desired effect
                     <!-- The user image in the navbar-->
                     <img src="{{ asset("adminlte/img/user8-128x128.jpg") }}" class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs">{{ Auth::user()->role->name }}</span>
+                    <span class="hidden-xs">{{ ucfirst(Auth::user()->role->description) }}</span>
                 </a>
                 <ul class="dropdown-menu">
-
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-
-                    {{-- @else
-                        <li class="nav-item dropdown">
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li> --}}
-                    @endguest
-
 
                     <!-- The user image in the menu -->
                     <li class="user-header">
@@ -125,22 +88,15 @@ desired effect
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Mi perfil</a>
-                            </div>
-                            <div class="pull-right">
-
-                            <div class="btn btn-flat btn-danger">
-                              <i class="fa fa-sign-out" aria-hidden="true"></i>
-                              <a  class="text-white" onclick="event.preventDefault();
-                                                  document.getElementById('logout-form').submit();">
-                                  {{ __('Cerrar sesión') }}
-                              </a>
-
+                            <a href="#" class="btn btn-success btn-flat"> <i class="fa fa-user"></i> Mi perfil</a>
+                        </div>
+                        <div class="pull-right">
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                   @csrf
+                                  <button type="submit" class="btn btn-default btn-flat">
+                                    Cerrar sesión <i class="fa fa-sign-out"></i>
+                                  </button>
                               </form>
-                            </div>
-
                         </div>
                     </li>
                 </ul>
@@ -264,7 +220,7 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{{ asset("adminlte/js/adminlte.min.js") }}"></script>
 
-
+@yield('js')
 
 </body>
 </html>
