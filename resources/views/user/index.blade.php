@@ -23,8 +23,8 @@
                             <th>Apellidos</th>
                             <th>DNI</th>
                             <th>Celular</th>
-                            {{-- <th>Correo</th> --}}
                             <th>Rol</th>
+                            <th>Estado</th>
                             <th colspan="2">Opciones</th>
                         </tr>
                     </thead>
@@ -35,8 +35,14 @@
                                 <td>{{$user->lastname}}</td>
                                 <td>{{$user->dni}}</td>
                                 <td>{{$user->phone}}</td>
-                                {{-- <td>{{$user->email}}</td> --}}
                                 <td>{{$user->role->description}}</td>
+                                <td>
+                                    @if ($user->active == 1)
+                                        <span class="label label-success">Activo</span>
+                                    @else
+                                        <span class="label label-danger">Desactivado</span>
+                                    @endif
+                                </td>
                                 <td><a href="/user/{{$user->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="/user/{{$user->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>

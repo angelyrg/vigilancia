@@ -32,10 +32,7 @@ class HorarioController extends Controller
 
         return view("horario.index", ["horarios" => $horarios, 'dias'=>$dias, 'vigilantes' => $vigilantes]);
 
-
         //return view("horario.index", ["vigilantes" => User::all()->where('role_id', 2), 'dias'=>$dias]);
-
-
 
     }
 
@@ -47,7 +44,7 @@ class HorarioController extends Controller
     public function create()
     {
         $horarios = Horario::all();
-        $vigilantes = User::all()->where('role_id', 2);
+        $vigilantes = User::all()->where('role_id', 2)->where('active', 1);
 
         //return $vigilantes;
 

@@ -9,10 +9,12 @@ use App\Role;
 
 class UserController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('authAdmin');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -33,7 +35,6 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-
         return view('user.create');
     }
 
@@ -105,6 +106,7 @@ class UserController extends Controller
             'dni' => 'required|numeric|digits:8|unique:users,dni,'.$user->id,
             'phone' => 'required|numeric|digits:9',
             'role_id' => 'required|numeric|min:1|max:2',
+            'active' => 'required|bool',
             // 'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
         
@@ -114,7 +116,9 @@ class UserController extends Controller
         $user->phone = $validatedData['phone'];
         // $user->email = $validatedData['email'];
         $user->role_id = $validatedData['role_id'];
-        // $user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar el dni
+        $user->active = $validatedData['active'];
+
+        $user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar el dni si está comentado
         $user->save();
         
 
@@ -138,4 +142,5 @@ class UserController extends Controller
     public function confirmDelete($id){
         return view('user.confirmDelete', ['user' => User::findOrFail($id)]);
     }
+
 }

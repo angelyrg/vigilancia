@@ -103,7 +103,35 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+
+                        
+                        <div class="form-group row {{ $errors->has('active') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
+
+                            <div class="col-md-6">
+
+
+                                <select name="active" id="active" class="form-control" required>
+                                    @if ($user->active == 1)
+                                        <option value="1" selected>Activo</option>
+                                        <option value="0">Desactivado</option>                                        
+                                    @else
+                                        <option value="1">Activo</option>
+                                        <option value="0" selected>Desactivado</option>                                        
+                                    @endif
+                                </select>
+
+                                
+
+                                @if ($errors->has('active'))
+                                    <span class="help-block" role="alert">
+                                        <strong>{{ $errors->first('role_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>                        
+
 
                         <div class="form-group">
                             <div class="col text-right">
