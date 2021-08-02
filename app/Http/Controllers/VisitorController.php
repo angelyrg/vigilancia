@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Office;
 use App\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class VisitorController extends Controller
      */
     public function create()
     {
-        return view('visitors.create');
+        $offices = Office::all();
+        return view('visitors.create', ['offices'=>$offices]);
     }
 
     /**
@@ -47,6 +49,7 @@ class VisitorController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
+            'oficina_id' => 'required|numeric',
             'motivo' => 'required|string',
         ]);
 
@@ -54,6 +57,7 @@ class VisitorController extends Controller
         $visitor->nombres = $validatedData['nombres'];
         $visitor->apellidos = $validatedData['apellidos'];
         $visitor->dni = $validatedData['dni'];
+        $visitor->oficina_id = $validatedData['oficina_id'];
         $visitor->motivo = $validatedData['motivo'];
         $visitor->estado = 0;
         $visitor->login_id = Auth::user()->id;
@@ -64,16 +68,6 @@ class VisitorController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -83,7 +77,9 @@ class VisitorController extends Controller
      */
     public function edit($id)
     {
-        return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id)]);
+        $offices = Office::all();
+
+        return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
     }
 
     /**
@@ -99,6 +95,7 @@ class VisitorController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
+            'oficina_id' => 'required|numeric',
             'motivo' => 'required|string',
         ]);
 
@@ -106,6 +103,7 @@ class VisitorController extends Controller
         $visitor->nombres = $validatedData['nombres'];
         $visitor->apellidos = $validatedData['apellidos'];
         $visitor->dni = $validatedData['dni'];
+        $visitor->oficina_id = $validatedData['oficina_id'];
         $visitor->motivo = $validatedData['motivo'];
         $visitor->login_id = Auth::user()->id;
         

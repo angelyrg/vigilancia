@@ -80,6 +80,25 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group {{$errors->has('oficina_id') ? ' has-error' : ''}}">
+                            <label for="oficina_id" >{{ __('Oficina al que visita') }}</label>
+    
+                            <div >
+                                <select id="oficina_id" name="oficina_id"  class="form-control" required >
+                                    <option value="">-Seleccione-</option>
+                                    @foreach ($offices as $office)
+                                        <option value="{{$office->id}}" {{ old('oficina_id') == $office->id ? 'selected' : ''}}>{{$office->nombre_oficina}}</option>
+                                    @endforeach
+                                </select>
+    
+                                @if ($errors->has('oficina_id'))
+                                    <span class="help-block" role="alert">
+                                        <strong>{{ $errors->first('oficina_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>    
     
                         <div class="form-group {{ $errors->has('motivo') ? ' has-error' : '' }}">
                             <label for="motivo" >{{ __('Motivo de Visita') }}</label>
@@ -93,8 +112,6 @@
                                 @endif
                             </div>
                         </div>
-                          
-                    
                     </div>
     
                     <div class="box-footer">

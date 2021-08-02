@@ -20,6 +20,7 @@
                             <th>DNI</th>
                             <th>Fecha de registro</th>
                             <th>Fecha de salida</th>
+                            <th>Oficina</th>
                             <th>Motivo</th>
                             <th>Estado</th>
                             <th colspan="2">Opciones</th>
@@ -33,6 +34,7 @@
                                 <td>{{$visitor->dni}}</td>
                                 <td>{{$visitor->created_at}}</td>
                                 <td>{{$visitor->leave_at}}</td>
+                                <td>{{$visitor->oficina->nombre_oficina }}</td>
                                 <td>{{$visitor->motivo}}</td>
                                 <td>
                                     @if ($visitor->estado == 0)

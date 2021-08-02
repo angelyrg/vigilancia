@@ -56,6 +56,29 @@
                         </div>
                     </div>
 
+                    <div class="form-group {{$errors->has('oficina_id') ? ' has-error' : ''}}">
+                        <label for="oficina_id" >{{ __('Oficina al que visita') }}</label>
+
+                        <div >
+                            <select id="oficina_id" name="oficina_id"  class="form-control" required >
+                                @foreach ($offices as $office)
+                                    @if ($office->id == $visitor->oficina_id)                                        
+                                        <option value="{{$office->id}}" {{ old('oficina_id') == $office->id ? 'selected' : ''}} selected>{{$office->nombre_oficina}}</option>
+                                    @else
+                                        <option value="{{$office->id}}" {{ old('oficina_id') == $office->id ? 'selected' : ''}} >{{$office->nombre_oficina}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
+                            @if ($errors->has('oficina_id'))
+                                <span class="help-block" role="alert">
+                                    <strong>{{ $errors->first('oficina_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>    
+
+
                     <div class="form-group {{$errors->has('motivo') ? ' has-error' : ''}}">
                         <label for="motivo" >{{ __('Motivo de visita') }}</label>
 

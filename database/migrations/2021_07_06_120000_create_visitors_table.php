@@ -19,7 +19,9 @@ class CreateVisitorsTable extends Migration
             $table->string('dni', 8);
             $table->string('nombres', 100);
             $table->string('apellidos', 100);
+            $table->integer('oficina_id');
             $table->string('motivo');
+            
             $table->char('estado', 1);
             $table->datetime('leave_at')->nullable();
 

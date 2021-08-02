@@ -148,7 +148,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Optionally, you can add icons to the links -->
           <li><a href="/user"><i class="fa fa-user text-aqua"></i> <span>Usuarios</span></a></li>
           <li><a href="/horario"><i class="fa fa-calendar text-aqua"></i> <span>Horarios</span></a></li>
-        @endif
+          <li><a href="/offices"><i class="fa fa-building-o text-aqua"></i> <span>Oficinas</span></a></li>
+
+          @endif
 
         <li class="header">MENÚ</li>
 
