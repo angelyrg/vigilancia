@@ -64,10 +64,32 @@ class HorarioController extends Controller
 
         $validatedData = $request->validate([
             'user_id' => 'required|numeric',
+
             'dia_semana_inicio' => 'required|numeric',
-            'dia_semana_fin' => 'required|numeric',
+            'dia_semana_fin' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ( !($value==0 && $request['dia_semana_inicio']==6)){
+                        if ( $value < $request['dia_semana_inicio'] ) {
+                            $fail('El día de fin del turno debe ser posterior o igual al día inicial.');
+                        }
+                    }
+                },
+            ],
+
             'hora_inicio' => 'required|date_format:H:i',
-            'hora_final' => 'required|date_format:H:i',
+            'hora_final' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request['dia_semana_inicio'] == $request['dia_semana_fin']){
+                        if ( $value <= $request['hora_inicio'] ) {
+                            $fail('La hora de fin de turno debe ser mayor que el inicial.');
+                        }
+                    }
+                },
+            ]
+
+
         ]);
 
         $horario = new Horario;
