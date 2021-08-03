@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- To the right -->
     <div class="pull-right hidden-xs">v2.0</div>
     <!-- Default to the left -->
-    <b>Sistemas EPIS-UNH </b>&copy; 2021  <a href="#">Politicas de privacidad</a>
+    <b>Sistemas EPIS-UNH </b>&copy; 2021  <a href="/creditos">Todos los derechos reservados</a>
   </footer>
 
 

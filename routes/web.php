@@ -54,7 +54,9 @@ Route::get('/supports/{id}/retorno', 'SupportController@retorno');
 
 Route::resource('/attendance', 'AttendanceController');
 
-
 Route::resource('/offices', 'OfficeController');
 Route::get('/offices/{id}/confirmDelete', 'OfficeController@confirmDelete');
 
+Route::get('/creditos', function () {
+    return view('creditos.index');
+});
