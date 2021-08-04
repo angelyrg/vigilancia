@@ -46,7 +46,7 @@
                     <h5 class="widget-user-desc">SCRUM TEAM</h5>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" src="{{ asset("img/angel-yaranga.jpg") }}" alt="User Avatar">
+                    <img class="img-circle" src="{{ asset("img/2017141050.jpg") }}" alt="User Avatar">
                 </div>
                 <div class="box-footer">                    
                 </div>
@@ -72,7 +72,7 @@
                     <h5 class="widget-user-desc">SCRUM TEAM</h5>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" src="{{ asset("img/yeris-ce.jpg") }}" alt="User Avatar">
+                    <img class="img-circle" src="{{ asset("img/yeris-casihue.jpg") }}" alt="User Avatar">
                 </div>
                 <div class="box-footer">                    
                 </div>

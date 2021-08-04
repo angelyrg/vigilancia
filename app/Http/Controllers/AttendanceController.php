@@ -11,15 +11,15 @@ class AttendanceController extends Controller
 
     public function __construct()
     {
-        $this->middleware('authAdmin');
+        $this->middleware('auth');
     }
 
 
     public function index(Request $request)
     {
 
-        $attendances = Attendance::where('user_id', Auth::user()->id)->paginate(10);
-        $dias = array("domingo","lunes","martes","miércoles","jueves","viernes","sábado");
+        $attendances = Attendance::where('user_id', Auth::user()->id)->orderByDesc("id")->paginate(10);
+        $dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 
         // $attendances = $attendances::paginate(10);
 
@@ -29,15 +29,19 @@ class AttendanceController extends Controller
 
     public function create(Request $request)
     {
-        return view('attendance.create');
+        $last = Attendance::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+
+        return view('attendance.create', ['lastRegister' => $last]);
     }
 
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'dni' => 'required|numeric|digits:8',
+            'user_id' => 'required|numeric',
         ]);
+
+
 
         $attendance = new Attendance();
         $attendance->dia_semana = date('w');
@@ -48,16 +52,14 @@ class AttendanceController extends Controller
         return redirect('/attendance');
     }
 
-    public function edit(Request $request, $id)
-    {
-        return view('attendance.edit', ['attendance'=>Attendance::findOrFail($id)]);
-    }
+ 
 
     public function update(Request $request, Attendance $attendance)
     {
-        $validatedData = $request->validate([
 
-            'dni' => 'required|numeric|digits:8',
+
+        $validatedData = $request->validate([
+            'user_id' => 'required|numeric',
         ]);
 
         $attendance->estado = 1;

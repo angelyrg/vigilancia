@@ -32,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    
+    @yield('css')
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -168,7 +168,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </ul>
         </li>
 
-        <li><a href="/attendance"><i class="fa fa-clock-o"></i> <span>Asistencia</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-clock-o"></i> <span>Asistencia</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/attendance/create"><i class="fa fa-check-circle-o"></i> <span>Registrar asistencia</span></a></li>
+            <li><a href="/attendance"><i class="fa fa-list"></i> <span>Mis asistencias</span></a></li>
+          </ul>
+        </li>
+
         <li><a href="/vehicles"><i class="fa fa-car"></i> <span>Gestión de Vehículos</span></a></li>
         <li><a href="/incidents"><i class="fa fa-grav"></i> <span>Gestión de Incidentes</span></a></li>
         <li><a href="/borrowings"><i class="fa fa-object-group"></i> <span>Gestión de Préstamos</span></a></li>
@@ -222,7 +233,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{ asset("adminlte/js/adminlte.min.js") }}"></script>
 
-@yield('js')
+
+@yield('scripts')
 
 </body>
 </html>

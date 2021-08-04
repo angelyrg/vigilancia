@@ -60,3 +60,6 @@ Route::get('/offices/{id}/confirmDelete', 'OfficeController@confirmDelete');
 Route::get('/creditos', function () {
     return view('creditos.index');
 });
+
+Route::post('/home/visitors', 'HomeController@visitors');
+Route::get('/home/visitorsLastYear', 'HomeController@visitorsLastYear');
