@@ -36,7 +36,7 @@
                                 <td>{{$vehicle->tipo_vehiculo}}</td>
                                 <td>{{$vehicle->color}}</td>
                                 <td>{{$vehicle->motivo}}</td>
-                                <td>{{$vehicle->created_at}}</td>
+                                <td>{{$vehicle->created_at->format('d/m/Y h:i A')}}</td>
                                 <td>{{$vehicle->leave_at}}</td>
                                 <td>
                                     @if ($vehicle->estado == 0)

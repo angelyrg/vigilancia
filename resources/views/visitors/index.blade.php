@@ -15,8 +15,8 @@
                 <table class="table table-hover" >
                     <thead class="thead-dark">
                         <tr>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
+                            <th>ID</th>
+                            <th>Nombres y Apellidos</th>
                             <th>DNI</th>
                             <th>Fecha de registro</th>
                             <th>Fecha de salida</th>
@@ -29,12 +29,22 @@
                     <tbody>
                         @foreach ($visitors as $visitor)
                             <tr>
-                                <td>{{$visitor->nombres}}</td>
-                                <td>{{$visitor->apellidos}}</td>
+                                <td>{{$visitor->id}}</td>
+                                <td>                                    
+                                    <a href="/visitors/{{$visitor->id}}/historialVisitantes" >{{$visitor->nombres." ".$visitor->apellidos}}</a>
+                                </td>
+                                
                                 <td>{{$visitor->dni}}</td>
-                                <td>{{$visitor->created_at}}</td>
-                                <td>{{$visitor->leave_at}}</td>
-                                <td>{{$visitor->oficina->nombre_oficina }}</td>
+                                <td>{{$visitor->created_at->format('d/m/Y h:i A')}}</td>
+                                @if ($visitor->estado == 1)
+                                    <td>{{date('d/m/Y h:i A', strtotime($visitor->leave_at))}}</td>
+                                @else
+                                    <td></td>
+                                @endif
+                                <td>
+                                    <a href="/offices/{{$visitor->oficina->id}}/historialOficinas" >{{$visitor->oficina->nombre_oficina }}</a>
+                                </td>
+
                                 <td>{{$visitor->motivo}}</td>
                                 <td>
                                     @if ($visitor->estado == 0)

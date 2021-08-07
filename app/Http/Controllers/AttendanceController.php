@@ -32,6 +32,8 @@ class AttendanceController extends Controller
         $last = Attendance::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
 
         return view('attendance.create', ['lastRegister' => $last]);
+
+        //return $last;
     }
 
 
@@ -40,8 +42,6 @@ class AttendanceController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required|numeric',
         ]);
-
-
 
         $attendance = new Attendance();
         $attendance->dia_semana = date('w');

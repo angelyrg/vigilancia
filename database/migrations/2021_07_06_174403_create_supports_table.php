@@ -29,7 +29,7 @@ class CreateSupportsTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('vigilante_id')->references('id')->on('users');
+        //$table->foreign('vigilante_id')->references('id')->on('users');
         });
     }
 

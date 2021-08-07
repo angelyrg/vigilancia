@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Office;
+use App\Visitor;
 use Illuminate\Http\Request;
 
 class OfficeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('authAdmin');
+        $this->middleware('auth');
     }
 
 
@@ -20,7 +21,7 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        $offices = Office::orderByDesc("id")->paginate(10);
+        $offices = Office::paginate(10);
 
         return view('offices.index', ['offices' => $offices]);
     }
@@ -74,4 +75,16 @@ class OfficeController extends Controller
     public function confirmDelete($id){
         return view('offices.confirmDelete', ['office' => Office::findOrFail($id)]);
     }
+
+
+    public function historialOficinas($id)
+    {
+        $office = Office::findOrFail($id);
+        $visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->get();
+        
+        //return $visitors;
+
+        return view('offices.historial', compact('visitors', 'office'));
+    }
+
 }

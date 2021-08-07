@@ -39,9 +39,9 @@
                             @foreach ($attendances as $attendance)
                                 <tr>
                                     <td>{{$dias[$attendance->dia_semana]}}</td>
-                                    <td>{{$attendance->created_at->format('d/m/Y h:m:s A')}}</td>
+                                    <td>{{$attendance->created_at->format('d/m/Y h:i:s A')}}</td>
                                     @if ($attendance->estado == 1)
-                                        <td>{{$attendance->updated_at->format('d/m/Y h:m:s A')}}</td>
+                                        <td>{{$attendance->updated_at->format('d/m/Y h:i:s A')}}</td>
                                         <td>
                                             <span class="label label-success"> Salida</span>
                                         </td>

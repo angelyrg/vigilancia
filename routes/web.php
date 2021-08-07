@@ -36,6 +36,7 @@ Route::get('/administrative/{id}/marcarSalida', 'AdministrativeController@marcar
 Route::resource('/visitors', 'VisitorController');
 Route::get('/visitors/{id}/confirmDelete', 'VisitorController@confirmDelete');
 Route::get('/visitors/{id}/marcarSalida', 'VisitorController@marcarSalida');
+Route::get('/visitors/{id}/historialVisitantes', 'VisitorController@historialVisitantes');
 
 Route::resource('/vehicles', 'VehicleController');
 Route::get('/vehicles/{id}/confirmDelete', 'VehicleController@confirmDelete');
@@ -56,10 +57,11 @@ Route::resource('/attendance', 'AttendanceController');
 
 Route::resource('/offices', 'OfficeController');
 Route::get('/offices/{id}/confirmDelete', 'OfficeController@confirmDelete');
+Route::get('/offices/{id}/historialOficinas', 'OfficeController@historialOficinas');
 
 Route::get('/creditos', function () {
     return view('creditos.index');
 });
 
 Route::post('/home/visitors', 'HomeController@visitors');
-Route::get('/home/visitorsLastYear', 'HomeController@visitorsLastYear');
+Route::get('/home/visitorsLastYear', 'HomeController@visitorsLastYear'); //En prueba

@@ -136,9 +136,19 @@ class VisitorController extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->estado = 1;  
         $visitor->leave_at = date("Y-m-d H:i:s");        
-        $visitor->save();        
+        $visitor->save();
         
         return redirect('/visitors');
+    }
+
+
+    public function historialVisitantes($id)
+    {
+        $v = Visitor::findOrFail($id);
+
+        $visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc')->get();
+        
+        return view('visitors.historial', compact('visits'));
     }
 
 

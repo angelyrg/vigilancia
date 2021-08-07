@@ -1,7 +1,5 @@
 @extends('layouts.adminlte')
 
-
-
 @section('content')
 
 
@@ -14,16 +12,23 @@
                 <h3 class="box-title">Registrar mi asistencia</h3>
             </div>
 
-            @if ($lastRegister->estado == 1)
-                <form method="POST" action="/attendance">
-                    @csrf
-                    @method('POST')
+            @if ($lastRegister != null )
+                                
+                @if ($lastRegister->estado == 1 )
+                    <form method="POST" action="/attendance">
+                        @csrf
+                        @method('POST')
+                @else
+                    <form method="POST" action="/attendance/{{$lastRegister->id}}">
+                        @csrf
+                        @method('put')
+                @endif                
             @else
-                <form method="POST" action="/attendance/{{$lastRegister->id}}">
-                    @csrf
-                    @method('put')
+            <form method="POST" action="/attendance">
+                @csrf
+                @method('POST')            
             @endif
-
+                
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
                 
                 <div class="box-body" style="margin-top: .50em;">
@@ -53,39 +58,47 @@
                         <br>
 
                         <div class="col-sm-6 col-sm-offset-3" >
+
+                            @if ($lastRegister != null )
                            
-                           @if ($lastRegister->estado == 1)
+                                @if ($lastRegister->estado == 1)
+                                        <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
+                                            <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
+                                            Registrar ingreso
+                                        </button>
+                                @else
+                                        <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;">
+                                            <i class="fa fa-sign-out fa-3x" aria-hidden="true" ></i><br>
+                                            Registrar salida
+                                        </button>
+                                @endif
+                            @else
                                 <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
                                     <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
                                     Registrar ingreso
                                 </button>
-                           @else
-                                <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;">
-                                    <i class="fa fa-sign-out fa-3x" aria-hidden="true" ></i><br>
-                                    Registrar salida
-                                </button>
-                           @endif
+                            @endif
          
                         </div>
   
                     </div>
-
-                    {{-- <div class="container">
-                        <p>Hora actual</p>
-                    </div> --}}
-                 
-                
                 </div>
 
 
 
                 <div class="box-footer">
                     <h4>Última vez:</h4>
-                    @if ($lastRegister->estado == 1)
-                        <span class="label label-info"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:m:s A')}}</label> <br>
-                        <span class="label label-info"><i class="fa fa-sign-out"></i></span> Salida : <label> {{ $lastRegister->updated_at->format('d/m/Y h:m:s A')}}</label> 
+                    @if ($lastRegister != null )
+
+                        @if ($lastRegister->estado == 1)
+                            <span class="label label-info"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:i:s A')}}</label> <br>
+                            <span class="label label-info"><i class="fa fa-sign-out"></i></span> Salida : <label> {{ $lastRegister->updated_at->format('d/m/Y h:i:s A')}}</label> 
+                        @else
+                            <span class="label label-success"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:i:s A')}}</label> 
+                        @endif
                     @else
-                        <span class="label label-success"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:m:s A')}}</label> 
+                        <span class="label label-info"><i class="fa fa-sign-in"></i></span> No hay registro previos <br>
+                        <span class="label label-info"><i class="fa fa-sign-out"></i></span> No hay registro previos   
                     @endif
 
                     

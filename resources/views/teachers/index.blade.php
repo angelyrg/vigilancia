@@ -34,7 +34,14 @@
                                 <td>{{$teacher->apellidos}}</td>
                                 <td>{{$teacher->dni}}</td>
                                 <td>{{$teacher->created_at}}</td>
-                                <td>{{$teacher->leave_at}}</td>
+
+                                @if ($teacher->estado == 0)
+                                    <td></td>                                    
+                                @else                                    
+                                    <td>{{date('d/m/Y h:i A', strtotime($teacher->leave_at))}}</td>
+                                @endif
+
+
                                 <td>{{$teacher->descripcion}}</td>
                                 <td>
                                     @if ($teacher->estado == 0)
