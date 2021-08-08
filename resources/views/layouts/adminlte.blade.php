@@ -70,7 +70,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="{{ asset("adminlte/img/user8-128x128.jpg") }}" class="user-image" alt="User Image">
+                    @if (Auth::user()->user_photo != null)                        
+                        <img src="{{ asset('img/'.Auth::user()->user_photo) }}" class="user-image" alt="User Image">
+                    @else
+                        <img src="{{ asset("/adminlte/img/user-default.jpg") }}" class="user-image" alt="User Image">
+                    @endif
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ ucfirst(Auth::user()->role->description) }}</span>
                 </a>
@@ -78,7 +82,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="{{ asset("adminlte/img/user8-128x128.jpg")}}" class="img-circle" alt="User Image">
+                        @if (Auth::user()->user_photo != null)                        
+                            <img src="{{ asset('img/'.Auth::user()->user_photo) }}" class="img-circle" alt="User Image">
+                        @else
+                            <img src="{{ asset("/adminlte/img/user-default.jpg") }}" class="img-circle" alt="User Image">
+                        @endif
 
                         <p>
                             {{ Auth::user()->name." ".Auth::user()->lastname }}
@@ -88,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-success btn-flat"> <i class="fa fa-user"></i> Mi perfil</a>
+                            <a href="/profile" class="btn btn-success btn-flat"> <i class="fa fa-user"></i> Mi perfil</a>
                         </div>
                         <div class="pull-right">
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" >
@@ -117,7 +125,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset("adminlte/img/user8-128x128.jpg") }}" class="img-circle" alt="User Image">
+          @if (Auth::user()->user_photo != null)                        
+              <img src="{{ asset('img/'.Auth::user()->user_photo) }}" class="img-circle" alt="User Image">
+          @else
+              <img src="{{ asset("/adminlte/img/user-default.jpg") }}" class="img-circle" alt="User Image">
+          @endif
+
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name." ".Auth::user()->lastname }}</p>
@@ -217,7 +230,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- To the right -->
     <div class="pull-right hidden-xs">v2.0</div>
     <!-- Default to the left -->
-    <b>Sistemas EPIS-UNH </b>&copy; 2021  <a href="/creditos">Todos los derechos reservados</a>
+    <b>Sistemas EPIS-UNH </b>&copy; 2021  <a href="/creditos">Equipo de desarrollo</a>
   </footer>
 
 

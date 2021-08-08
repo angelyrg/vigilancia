@@ -19,8 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/profile', 'ProfileController@profile');
+Route::put('/profile/{id}/updateProfile', 'ProfileController@updateProfile');
+Route::put('/profile/{id}/changePassword', 'ProfileController@changePassword');
+
+
 Route::resource('/user', 'UserController');
 Route::get('/user/{id}/confirmDelete', 'UserController@confirmDelete');
+
 
 Route::resource('/horario', 'HorarioController');
 Route::get('/horario/{id}/confirmDelete', 'HorarioController@confirmDelete');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class UserController extends Controller
@@ -69,16 +71,6 @@ class UserController extends Controller
         return redirect('/user');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -133,7 +125,6 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
         $user = User::findOrFail($id);
         $user->delete();
         return redirect('/user');
@@ -142,5 +133,6 @@ class UserController extends Controller
     public function confirmDelete($id){
         return view('user.confirmDelete', ['user' => User::findOrFail($id)]);
     }
+
 
 }
