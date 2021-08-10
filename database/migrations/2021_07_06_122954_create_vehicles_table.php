@@ -23,6 +23,9 @@ class CreateVehiclesTable extends Migration
             $table->string('color', 25);
             $table->string('motivo');
             $table->char('estado', 1);
+            
+            $table->char('propiedad_epis', 1);
+
             $table->datetime('leave_at')->nullable();
 
             $table->integer('login_id');

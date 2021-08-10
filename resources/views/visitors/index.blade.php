@@ -18,7 +18,7 @@
                             <th>ID</th>
                             <th>Nombres y Apellidos</th>
                             <th>DNI</th>
-                            <th>Fecha de registro</th>
+                            <th>Fecha de ingreso</th>
                             <th>Fecha de salida</th>
                             <th>Oficina</th>
                             <th>Motivo</th>
@@ -39,7 +39,7 @@
                                 @if ($visitor->estado == 1)
                                     <td>{{date('d/m/Y h:i A', strtotime($visitor->leave_at))}}</td>
                                 @else
-                                    <td></td>
+                                    <td><span class="label label-warning"><i class="fa fa-clock-o"></i> Pendiente</span></td>
                                 @endif
                                 <td>
                                     <a href="/offices/{{$visitor->oficina->id}}/historialOficinas" >{{$visitor->oficina->nombre_oficina }}</a>

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+     
     $('#btnBuscar').click(function(){
         event.preventDefault();
         var numdni = $('#dni_search').val();

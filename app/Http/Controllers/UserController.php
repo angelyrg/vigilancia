@@ -15,7 +15,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('authAdmin');
-    }
+    } 
 
 
     /**
@@ -48,6 +48,8 @@ class UserController extends Controller
      */
     public function store(Request $request, User $user)
     {
+        
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
@@ -58,6 +60,7 @@ class UserController extends Controller
         ]);
 
         $user = new User;
+        
         $user->name = $validatedData['name'];
         $user->lastname = $validatedData['lastname'];
         $user->dni = $validatedData['dni'];

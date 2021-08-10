@@ -19,7 +19,7 @@ class CreateAdministrativesTable extends Migration
             $table->string('dni', 8);
             $table->string('nombres', 100);
             $table->string('apellidos', 100);
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->char('estado', 1);
             $table->datetime('leave_at')->nullable();
 

@@ -82,10 +82,10 @@
                         </div>
     
                         <div class="form-group {{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                            <label for="descripcion" >{{ __('Descripción') }}</label>
+                            <label for="descripcion" >{{ __('Observación') }}</label>
     
                             <div >
-                                <textarea cols="30" rows="4" class="form-control" name="descripcion" id="descripcion" required> {{ old('descripcion') }}</textarea>
+                                <textarea cols="30" rows="4" class="form-control" name="descripcion" id="descripcion" > {{ old('descripcion') }}</textarea>
                                 @if ($errors->has('descripcion'))
                                     <span class="help-block" role="alert">
                                         <strong>{{ $errors->first('descripcion') }}</strong>

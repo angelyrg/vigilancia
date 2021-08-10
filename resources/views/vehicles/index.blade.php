@@ -20,10 +20,11 @@
                             <th>DNI Conductor</th>
                             <th>Tipo Vehículo</th>
                             <th>Color</th>
+                            <th>Propietario</th>
                             <th>Motivo</th>
                             <th>Fecha de registro</th>
                             <th>Fecha de salida</th>
-                            <th>Estado</th>
+                            <th>Ubicación</th>
                             <th colspan="2">Opciones</th>
                         </tr>
                     </thead>
@@ -35,14 +36,28 @@
                                 <td>{{$vehicle->dni_conductor}}</td>
                                 <td>{{$vehicle->tipo_vehiculo}}</td>
                                 <td>{{$vehicle->color}}</td>
+                                <td>
+                                    @if ($vehicle->propiedad_epis)
+                                        EPIS
+                                    @else
+                                        Externo
+                                    @endif
+                                    
                                 <td>{{$vehicle->motivo}}</td>
                                 <td>{{$vehicle->created_at->format('d/m/Y h:i A')}}</td>
-                                <td>{{$vehicle->leave_at}}</td>
                                 <td>
-                                    @if ($vehicle->estado == 0)
+                                    @if ($vehicle->leave_at == null)
                                         <a href="/vehicles/{{$vehicle->id}}/marcarSalida" class="btn btn-info btn-sm">Marcar salida</a>                                  
                                     @else
-                                        <span class="label label-success">Salió</span>                                          
+                                        {{date('d/m/Y h:i A', strtotime($vehicle->leave_at))}}
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($vehicle->estado == 0)
+                                        <span class="label label-success">Campus EPIS</span> 
+                                    @else
+                                        <span class="label label-default">Salió</span>                                          
                                     @endif
                                 </td>
                                 <td><a href="/vehicles/{{$vehicle->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>

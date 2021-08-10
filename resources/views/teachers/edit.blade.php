@@ -57,10 +57,10 @@
                     </div>
 
                     <div class="form-group {{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                        <label for="descripcion" >{{ __('Descripción') }}</label>
+                        <label for="descripcion" >{{ __('Observación') }}</label>
 
                         <div >
-                            <textarea cols="30" rows="4" class="form-control" name="descripcion" required>@if(!old('descripcion')){{$teacher->descripcion}}@else{{old('descripcion')}}@endif</textarea>
+                            <textarea cols="30" rows="4" class="form-control" name="descripcion" >@if(!old('descripcion')){{$teacher->descripcion}}@else{{old('descripcion')}}@endif</textarea>
                             @if ($errors->has('descripcion'))
                                 <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('descripcion') }}</strong>

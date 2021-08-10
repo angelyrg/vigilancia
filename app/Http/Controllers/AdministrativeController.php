@@ -47,14 +47,14 @@ class AdministrativeController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
-            'descripcion' => 'required|string',
+            
         ]);
 
         $administrative = new Administrative;
         $administrative->nombres = $validatedData['nombres'];
         $administrative->apellidos = $validatedData['apellidos'];
         $administrative->dni = $validatedData['dni'];
-        $administrative->descripcion = $validatedData['descripcion'];
+        $administrative->descripcion = $request->descripcion;
         $administrative->estado = 0;
         $administrative->login_id = Auth::user()->id;
         
@@ -99,14 +99,13 @@ class AdministrativeController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
-            'descripcion' => 'required|string',
         ]);
 
         $administrative = Administrative::findOrFail($id);
         $administrative->nombres = $validatedData['nombres'];
         $administrative->apellidos = $validatedData['apellidos'];
         $administrative->dni = $validatedData['dni'];
-        $administrative->descripcion = $validatedData['descripcion'];
+        $administrative->descripcion = $request->descripcion;
         $administrative->login_id = Auth::user()->id;
         
         $administrative->save();        

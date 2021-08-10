@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{$incident->nombre_incidente}}</td>
                                 <td>{{$incident->descripcion}}</td>
-                                <td>{{$incident->created_at}}</td>
+                                <td>{{$incident->created_at->format('d/m/Y h:i A')}}</td>
 
                                 <td><a href="/incidents/{{$incident->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="/incidents/{{$incident->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    

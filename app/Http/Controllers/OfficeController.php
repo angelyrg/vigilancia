@@ -80,8 +80,9 @@ class OfficeController extends Controller
     public function historialOficinas($id)
     {
         $office = Office::findOrFail($id);
-        $visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->get();
-        
+
+        //$visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->get();
+        $visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         //return $visitors;
 
         return view('offices.historial', compact('visitors', 'office'));

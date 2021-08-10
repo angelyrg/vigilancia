@@ -35,8 +35,8 @@
                                 <td>{{$support->oficina}}</td>
                                 <td>{{$support->documento}}</td>
                                 <td>{{$support->destino}}</td>
-                                <td>{{$support->created_at}}</td>
-                                <td>{{$support->fecha_retorno}}</td>
+                                <td>{{$support->created_at->format('d/m/Y h:i A')}}</td>
+                                <td>{{ date('d/m/Y h:i A', strtotime($support->fecha_retorno))}}</td>
 
                                 <td>
                                     @if ($support->estado == 0)

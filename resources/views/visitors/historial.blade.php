@@ -10,6 +10,19 @@
 
     <div class="col-md-12 ">
 
+        <div class="box box-primary">
+            <div class="box-footer clearfix">
+                <div class="pagination pagination-sm no-margin pull-right">
+                    {!! $visits->render() !!}
+                </div>
+                <h4 >
+                    <br>
+                    Se muestran registros desde <span class="label label-info">{{$visits->first()->created_at->format('d/m/Y')}}</span> hasta <span class="label label-info">{{$visits->last()->created_at->format('d/m/Y')}}</span>     
+                </h4> 
+            </div>
+        </div>
+
+
         <ul class="timeline">
 
             @foreach ($visits as $visit)

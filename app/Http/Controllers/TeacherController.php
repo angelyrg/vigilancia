@@ -48,14 +48,13 @@ class TeacherController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
-            'descripcion' => 'required|string',
         ]);
 
         $teacher = new Teacher;
         $teacher->nombres = $validatedData['nombres'];
         $teacher->apellidos = $validatedData['apellidos'];
         $teacher->dni = $validatedData['dni'];
-        $teacher->descripcion = $validatedData['descripcion'];
+        $teacher->descripcion = $request->descripcion;
         $teacher->estado = 0;
         $teacher->login_id = Auth::user()->id;
         
@@ -100,14 +99,13 @@ class TeacherController extends Controller
             'nombres' => 'required|string|max:75',
             'apellidos' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8',
-            'descripcion' => 'required|string',
         ]);
 
         $teacher = Teacher::findOrFail($id);
         $teacher->nombres = $validatedData['nombres'];
         $teacher->apellidos = $validatedData['apellidos'];
         $teacher->dni = $validatedData['dni'];
-        $teacher->descripcion = $validatedData['descripcion'];
+        $teacher->descripcion = $request->descripcion;
         $teacher->login_id = Auth::user()->id;
         
         $teacher->save();        

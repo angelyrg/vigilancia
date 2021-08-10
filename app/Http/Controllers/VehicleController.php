@@ -52,6 +52,7 @@ class VehicleController extends Controller
             'tipo_vehiculo' => 'required|string|max:50',
             'color' => 'required|string|max:25',
             'motivo' => 'required|string',
+            'propiedad_epis' => 'required|numeric|min:0|max:1', 
         ]);
 
         $vehicle = new Vehicle;
@@ -61,6 +62,8 @@ class VehicleController extends Controller
         $vehicle->tipo_vehiculo = $validatedData['tipo_vehiculo'];
         $vehicle->color = $validatedData['color'];
         $vehicle->motivo = $validatedData['motivo'];
+
+        $vehicle->propiedad_epis = $validatedData['propiedad_epis'];
 
         $vehicle->estado = 0;
         $vehicle->login_id = Auth::user()->id;
@@ -110,6 +113,7 @@ class VehicleController extends Controller
             'tipo_vehiculo' => 'required|string|max:50',
             'color' => 'required|string|max:25',
             'motivo' => 'required|string',
+            'propiedad_epis' => 'required|numeric|min:0|max:1', 
         ]);
 
         $vehicle = Vehicle::findOrFail($id);
@@ -119,6 +123,9 @@ class VehicleController extends Controller
         $vehicle->tipo_vehiculo = $validatedData['tipo_vehiculo'];
         $vehicle->color = $validatedData['color'];
         $vehicle->motivo = $validatedData['motivo'];
+
+        $vehicle->propiedad_epis = $validatedData['propiedad_epis'];
+        
         
         $vehicle->save();        
         

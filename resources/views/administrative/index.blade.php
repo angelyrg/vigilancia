@@ -22,9 +22,9 @@
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>DNI</th>
-                            <th>Fecha de registro</th>
+                            <th>Fecha de ingreso</th>
                             <th>Fecha de salida</th>
-                            <th>Descripción</th>
+                            <th>Observación</th>
                             <th>Estado</th>
                             <th colspan="2">Opciones</th>
                         </tr>
@@ -35,9 +35,21 @@
                                 <td>{{$item->nombres}}</td>
                                 <td>{{$item->apellidos}}</td>
                                 <td>{{$item->dni}}</td>
-                                <td>{{$item->created_at}}</td>
-                                <td>{{$item->leave_at}}</td>
-                                <td>{{$item->descripcion}}</td>
+                                <td>{{$item->created_at->format('d/m/Y h:i A')}}</td>
+                                <td>
+                                    @if ($item->estado == 0)
+                                        <span class="label label-warning">Pendiente</span>                                  
+                                    @else
+                                        {{date('d/m/Y h:i A', strtotime($item->leave_at))}}                                        
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->descripcion != null)
+                                        {{$item->descripcion}}
+                                    @else
+                                        <span class="label label-primary"><i class="fa fa-check-square-o"></i> Ninguna</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($item->estado == 0)
                                         <a href="/administrative/{{$item->id}}/marcarSalida" class="btn btn-info btn-sm">Marcar salida</a>                                  

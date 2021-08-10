@@ -20,9 +20,9 @@
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>DNI</th>
-                            <th>Fecha de registro</th>
+                            <th>Fecha de ingreso</th>
                             <th>Fecha de salida</th>
-                            <th>Descripción</th>
+                            <th>Observación</th>
                             <th>Estado</th>
                             <th colspan="2">Opciones</th>
                         </tr>
@@ -33,16 +33,25 @@
                                 <td>{{$teacher->nombres}}</td>
                                 <td>{{$teacher->apellidos}}</td>
                                 <td>{{$teacher->dni}}</td>
-                                <td>{{$teacher->created_at}}</td>
+                                <td>{{$teacher->created_at->format('d/m/Y h:i A')}}</td>
 
                                 @if ($teacher->estado == 0)
-                                    <td></td>                                    
+                                    <td><span class="label label-warning">Pendiente</span></td>                                    
                                 @else                                    
                                     <td>{{date('d/m/Y h:i A', strtotime($teacher->leave_at))}}</td>
                                 @endif
 
+                                <td>
+                                    @if ($teacher->descripcion != null)
+                                        {{$teacher->descripcion}}
+                                    @else
+                                        <span class="label label-primary"><i class="fa fa-check-square-o"></i> Ninguna</span>
+                                        
+                                    @endif
+                                </td>
 
-                                <td>{{$teacher->descripcion}}</td>
+
+                                
                                 <td>
                                     @if ($teacher->estado == 0)
                                         <a href="/teachers/{{$teacher->id}}/marcarSalida" class="btn btn-info btn-sm">Marcar salida</a>                                  

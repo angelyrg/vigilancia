@@ -19,8 +19,8 @@
                             <th>Cantidad</th>
                             <th>Nombre encargado</th>
                             {{-- <th>DNI</th> --}}
+                            <th>Fecha de préstamo</th>
                             <th>Descripción</th>
-                            <th>Fecha de registro</th>
                             <th>Fecha de devolución</th>
                             <th>Estado</th>
                             <th colspan="2">Opciones</th>
@@ -33,9 +33,9 @@
                                 <td>{{$borrowing->cantidad}}</td>
                                 <td>{{$borrowing->nombre_encargado}}</td>
                                 {{-- <td>{{$borrowing->dni}}</td> --}}
+                                <td>{{$borrowing->created_at->format('d/m/Y h:i A')}}</td>
                                 <td>{{$borrowing->descripcion}}</td>
-                                <td>{{$borrowing->created_at}}</td>
-                                <td>{{$borrowing->fecha_devolucion}}</td>
+                                <td>{{date('d/m/Y h:i A', strtotime($borrowing->fecha_devolucion ))}}</td>
                                 <td>
                                     @if ($borrowing->estado == 0)
                                         <a href="/borrowings/{{$borrowing->id}}/devolucion" class="btn btn-info btn-sm">Marcar devolución</a>                                  

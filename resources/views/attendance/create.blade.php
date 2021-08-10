@@ -30,7 +30,9 @@
             @endif
                 
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+
                 
+
                 <div class="box-body" style="margin-top: .50em;">
                     <div class="row container-fluid text-center" >
                         <div class="text-center">
@@ -49,35 +51,49 @@
                                         <div id="clock"></div>
                                         <div id="date"></div>
                                     </div>
-
+                                </div>
                             </div>
-                            </div>
-
+                            
 
                         </div>
                         <br>
 
                         <div class="col-sm-6 col-sm-offset-3" >
 
-                            @if ($lastRegister != null )
-                           
-                                @if ($lastRegister->estado == 1)
-                                        <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
-                                            <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
-                                            Registrar ingreso
-                                        </button>
-                                @else
-                                        <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;">
-                                            <i class="fa fa-sign-out fa-3x" aria-hidden="true" ></i><br>
-                                            Registrar salida
-                                        </button>
-                                @endif
+                            
+                            @if (Session::has('message'))
+                                
+                                <div class="callout callout-warning">
+                                    <h4><i class="fa fa-exclamation-circle"></i></h4>
+                    
+                                    <p>{{Session::get('message')}}</p>
+                                  </div>
+
                             @else
-                                <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
-                                    <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
-                                    Registrar ingreso
-                                </button>
+
+                                @if ($lastRegister != null )
+                            
+                                    @if ($lastRegister->estado == 1)
+                                            <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
+                                                <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
+                                                Registrar ingreso
+                                            </button>
+                                    @else
+                                            <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;">
+                                                <i class="fa fa-sign-out fa-3x" aria-hidden="true" ></i><br>
+                                                Registrar salida
+                                            </button>
+                                    @endif
+                                @else
+                                    <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
+                                        <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
+                                        Registrar ingreso
+                                    </button>
+                                @endif
                             @endif
+
+
+
          
                         </div>
   

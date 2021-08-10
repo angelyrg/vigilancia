@@ -34,6 +34,7 @@ class VisitorController extends Controller
     public function create()
     {
         $offices = Office::all();
+
         return view('visitors.create', ['offices'=>$offices]);
     }
 
@@ -146,8 +147,10 @@ class VisitorController extends Controller
     {
         $v = Visitor::findOrFail($id);
 
-        $visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc')->get();
-        
+        //$visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc'))->get();
+        $visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc')->paginate(5);
+
+
         return view('visitors.historial', compact('visits'));
     }
 

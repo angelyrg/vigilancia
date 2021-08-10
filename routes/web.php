@@ -24,7 +24,8 @@ Route::put('/profile/{id}/updateProfile', 'ProfileController@updateProfile');
 Route::put('/profile/{id}/changePassword', 'ProfileController@changePassword');
 
 
-Route::resource('/user', 'UserController');
+Route::resource('/user', 'UserController'); 
+
 Route::get('/user/{id}/confirmDelete', 'UserController@confirmDelete');
 
 

@@ -80,6 +80,24 @@
                         </div>
                     </div>
 
+                    <div class="form-group {{ $errors->has('propiedad_epis') ? ' has-error' : '' }}">
+                        <label for="propiedad_epis" >Propietario</label>
+
+                        <div >
+                            <select name="propiedad_epis" id="propiedad_epis" class="form-control" required> 
+                                <option value="1">Propiedad de EPIS</option>
+                                <option value="0">Externo</option>
+                            </select>
+
+                            @if ($errors->has('propiedad_epis'))
+                                <span class="help-block" role="alert">
+                                    <strong>{{ $errors->first('propiedad_epis') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>                        
+
+
                     <div class="form-group {{$errors->has('motivo') ? ' has-error' : ''}}">
                         <label for="motivo" >{{ __('Motivo de Visita') }}</label>
 
