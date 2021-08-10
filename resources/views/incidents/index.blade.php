@@ -15,6 +15,7 @@
                 <table class="table table-hover" >
                     <thead class="thead-dark">
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Fecha de registro</th>
@@ -24,6 +25,7 @@
                     <tbody>
                         @foreach ($incidents as $incident)
                             <tr>
+                                <td>{{$incident->id}}</td>
                                 <td>{{$incident->nombre_incidente}}</td>
                                 <td>{{$incident->descripcion}}</td>
                                 <td>{{$incident->created_at->format('d/m/Y h:i A')}}</td>

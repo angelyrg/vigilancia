@@ -17,6 +17,7 @@
                 <table class="table table-hover" >
                     <thead class="thead-dark">
                         <tr>
+                            <th>ID</th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>DNI</th>
@@ -30,6 +31,7 @@
                     <tbody>
                         @foreach ($teachers as $teacher)
                             <tr>
+                                <td>{{$teacher->id}}</td>
                                 <td>{{$teacher->nombres}}</td>
                                 <td>{{$teacher->apellidos}}</td>
                                 <td>{{$teacher->dni}}</td>

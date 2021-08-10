@@ -36,11 +36,17 @@
                                 <td>{{$support->documento}}</td>
                                 <td>{{$support->destino}}</td>
                                 <td>{{$support->created_at->format('d/m/Y h:i A')}}</td>
-                                <td>{{ date('d/m/Y h:i A', strtotime($support->fecha_retorno))}}</td>
+                                <td>
+                                    @if ($support->estado == 0)
+                                        <span class="label label-warning"><i class="fa fa-clock-o"></i> Pendiente</span>                                  
+                                    @else
+                                        {{ date('d/m/Y h:i A', strtotime($support->fecha_retorno))}}                                         
+                                    @endif
+                                </td>
 
                                 <td>
                                     @if ($support->estado == 0)
-                                        <a href="/supports/{{$support->id}}/retorno" class="btn btn-success btn-sm">Marcar retorno</a>                                  
+                                        <a href="/supports/{{$support->id}}/retorno" class="btn btn-info btn-sm">Marcar retorno</a>                                  
                                     @else
                                         <span class="label label-success">Retornó</span>                                          
                                     @endif

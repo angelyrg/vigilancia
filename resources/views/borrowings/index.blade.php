@@ -35,7 +35,14 @@
                                 {{-- <td>{{$borrowing->dni}}</td> --}}
                                 <td>{{$borrowing->created_at->format('d/m/Y h:i A')}}</td>
                                 <td>{{$borrowing->descripcion}}</td>
-                                <td>{{date('d/m/Y h:i A', strtotime($borrowing->fecha_devolucion ))}}</td>
+                                <td>
+                                    @if ($borrowing->estado == 0)
+                                        <span class="label label-warning"><i class="fa fa-clock-o"></i> Pendiente</span>                                  
+                                    @else
+                                        {{date('d/m/Y h:i A', strtotime($borrowing->fecha_devolucion ))}}                                         
+                                    @endif
+                                </td>
+
                                 <td>
                                     @if ($borrowing->estado == 0)
                                         <a href="/borrowings/{{$borrowing->id}}/devolucion" class="btn btn-info btn-sm">Marcar devolución</a>                                  
