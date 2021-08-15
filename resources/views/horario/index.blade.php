@@ -5,7 +5,6 @@
 
     <h3>Gestión de Horarios</h3>
     <hr>
-    {{date('w')}}
     <div class="box">
         <div class="box-header"><h3 class="box-title">Horarios</h3> </div>
         <div class="box-body">
