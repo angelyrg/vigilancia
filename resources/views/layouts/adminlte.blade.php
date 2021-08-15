@@ -18,7 +18,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="{{ asset("adminlte/bootstrap/dist/css/bootstrap.min.css") }}">
     <!-- Font Awesome -->
-
     <link rel="stylesheet" href="{{ asset("adminlte/font-awesome/css/font-awesome.min.css") }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset("adminlte/Ionicons/css/ionicons.min.css") }}">
@@ -26,6 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset("adminlte/css/AdminLTE.min.css") }}">
 
     <link rel="stylesheet" href="{{ asset("adminlte/css/skins/skin-blue.min.css") }}">
+
+    <link rel="shortcut icon" href="{{ asset("img/logoEPIS.png")}}" type="image/x-icon">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="{{ asset("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic") }}">
@@ -162,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li><a href="/user"><i class="fa fa-user text-aqua"></i> <span>Usuarios</span></a></li>
           <li><a href="/horario"><i class="fa fa-calendar text-aqua"></i> <span>Horarios</span></a></li>
           <li><a href="/offices"><i class="fa fa-building-o text-aqua"></i> <span>Oficinas</span></a></li>
-
+          <li><a href="/attendance"><i class="fa fa-check text-aqua"></i> <span>Asistencias</span></a></li>
           @endif
 
         <li class="header">MENÚ</li>
@@ -181,27 +182,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </ul>
         </li>
 
-        <li class="treeview">
-          <a href="#"><i class="fa fa-clock-o"></i> <span>Asistencia</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/attendance/create"><i class="fa fa-check-circle-o"></i> <span>Registrar asistencia</span></a></li>
-            <li><a href="/attendance"><i class="fa fa-list"></i> <span>Mis asistencias</span></a></li>
-          </ul>
-        </li>
+        @if (Auth::user()->role_id != 1)              
+          <li class="treeview">
+            <a href="#"><i class="fa fa-clock-o"></i> <span>Asistencia</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/attendance/create"><i class="fa fa-check-circle-o"></i> <span>Registrar asistencia</span></a></li>
+              <li><a href="/attendance"><i class="fa fa-list"></i> <span>Mis asistencias</span></a></li>
+            </ul>
+          </li>
+        @endif
 
         <li><a href="/vehicles"><i class="fa fa-car"></i> <span>Gestión de Vehículos</span></a></li>
         <li><a href="/incidents"><i class="fa fa-grav"></i> <span>Gestión de Incidentes</span></a></li>
         <li><a href="/borrowings"><i class="fa fa-object-group"></i> <span>Gestión de Préstamos</span></a></li>
         <li><a href="/supports"><i class="fa fa-book"></i> <span>Gestión de Apoyo</span></a></li>
 
-
-
       </ul>
-      <!-- /.sidebar-menu -->
+      <!-- /.sidebar-menu --> 
     </section>
     <!-- /.sidebar -->
   </aside>

@@ -6,15 +6,27 @@
 <hr>
 
 
+
+
 <div class="row">
     <div class="container">
-    
-        
-        
-        <div class="container row text-right">        
-            <a href="/attendance/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Registrar asistencia</a>
-        </div>
-    
+
+        @if (Session::has('message') )
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+                {{ Session::get("message")}}
+            </div>
+        @endif
+
+        @if (Auth::user()->role_id != 1)
+
+            <div class="container row text-right">        
+                <a href="/attendance/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Registrar asistencia</a>
+            </div>
+            
+        @endif
+                
     
     
     
@@ -36,9 +48,11 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            
                             @foreach ($attendances as $attendance)
                                 <tr>
-                                    <td>{{$dias[$attendance->dia_semana]}}</td>
+                                    <td>{{$attendance->id}}</td>
                                     <td>{{$attendance->created_at->format('d/m/Y h:i:s A')}}</td>
                                     @if ($attendance->estado == 1)
                                         <td>{{$attendance->updated_at->format('d/m/Y h:i:s A')}}</td>
@@ -47,11 +61,13 @@
                                         </td>
 
                                     @else
-                                        <td> <span class="label label-warning">Pendiente</span> </td>
+                                        <td> <span class="label label-warning"><i class="fa fa-clock-o"></i> Pendiente</span> </td>
                                         <td>
-                                            <a href="/attendance/create" class="btn btn-sm btn-primary"> <i class="fa fa-clock-o"></i> Marcar salida </a>
-
-                                            {{-- <span class="label label-warning">{{$attendance->estado}} Ingreso</span> --}}
+                                            @if (Auth::user()->role_id == 1)
+                                                <span class="label label-info">En el trabajo</span>
+                                            @else                                            
+                                                <a href="/attendance/create" class="btn btn-sm btn-primary">  Marcar salida <i class="fa fa-arrow-right"></i> </a>
+                                            @endif
                                         </td>
                                         
                                     @endif

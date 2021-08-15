@@ -3,6 +3,16 @@
 @section('content')
 <div class="container">
 
+    @if (Session::has('messageNoHorario') )
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+            {{ Session::get("messageNoHorario")}}
+        </div>
+    @endif
+
+
+
     <h3>Gestión de registros de Administrativos</h3>
     <hr>
     <div class="container row text-right">        

@@ -16,12 +16,13 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->char('dia_semana', 1);
-            $table->char('estado', 1);
-            $table->timestamps();
-
+            // $table->char('dia_semana', 1);
+            
             $table->integer('user_id')->unsigned();
             //$table->foreign('user_id')->references('id')->on('users');
+            
+            $table->char('estado', 1);
+            $table->timestamps();
 
         });
     }

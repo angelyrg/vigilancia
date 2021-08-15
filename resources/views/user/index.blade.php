@@ -1,7 +1,11 @@
 @extends('layouts.adminlte')
 
 @section('content')
+
 <div class="container">
+
+
+
 
     <h3>Gestión de usuarios</h3>
     <hr>
@@ -62,4 +66,5 @@
 
 
 </div>
-@endsection
+
+@endsection 

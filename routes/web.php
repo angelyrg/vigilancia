@@ -31,6 +31,8 @@ Route::get('/user/{id}/confirmDelete', 'UserController@confirmDelete');
 
 Route::resource('/horario', 'HorarioController');
 Route::get('/horario/{id}/confirmDelete', 'HorarioController@confirmDelete');
+Route::get('/horario/{id}/registrarHorario', 'HorarioController@registrarHorario');
+
 
 Route::resource('/teachers', 'TeacherController');
 Route::get('/teachers/{id}/confirmDelete', 'TeacherController@confirmDelete');

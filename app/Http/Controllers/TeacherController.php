@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Horario;
 
 class TeacherController extends Controller
 {
@@ -32,7 +33,25 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teachers.create');
+        //return view('teachers.create');
+
+        if (Auth::user()->role_id == 1 ) {
+            return view('teachers.create');
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    return view('teachers.create');
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    return view('teachers.create');
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    return view('teachers.create');
+                }
+            }
+            return redirect('/teachers')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
     }
 
     /**
@@ -82,7 +101,27 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return view('teachers.edit', ['teacher'=>Teacher::findOrFail($id)]);
+        
+
+        if (Auth::user()->role_id == 1 ) {
+            return view('teachers.edit', ['teacher'=>Teacher::findOrFail($id)]);
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    return view('teachers.edit', ['teacher'=>Teacher::findOrFail($id)]);
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    return view('teachers.edit', ['teacher'=>Teacher::findOrFail($id)]);
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    return view('teachers.edit', ['teacher'=>Teacher::findOrFail($id)]);
+                }
+            }
+            return redirect('/teachers')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
+
+        
     }
 
     /**
@@ -127,16 +166,74 @@ class TeacherController extends Controller
     }
 
     public function confirmDelete($id){
-        return view('teachers.confirmDelete', ['teacher' => Teacher::findOrFail($id)]);
+
+        if (Auth::user()->role_id == 1 ) {
+            return view('teachers.confirmDelete', ['teacher' => Teacher::findOrFail($id)]);
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    return view('teachers.confirmDelete', ['teacher' => Teacher::findOrFail($id)]);
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    return view('teachers.confirmDelete', ['teacher' => Teacher::findOrFail($id)]);
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    return view('teachers.confirmDelete', ['teacher' => Teacher::findOrFail($id)]);
+                }
+            }
+            return redirect('/teachers')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
+
     }
 
     public function marcarSalida($id){
 
-        $teacher = Teacher::findOrFail($id);
-        $teacher->estado = 1;  
-        $teacher->leave_at = date("Y-m-d H:i:s");        
-        $teacher->save();        
         
-        return redirect('/teachers');
+
+        if (Auth::user()->role_id == 1 ) {
+            $teacher = Teacher::findOrFail($id);
+            $teacher->estado = 1;  
+            $teacher->leave_at = date("Y-m-d H:i:s");        
+            $teacher->save();        
+            
+            return redirect('/teachers');
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    $teacher = Teacher::findOrFail($id);
+                    $teacher->estado = 1;  
+                    $teacher->leave_at = date("Y-m-d H:i:s");        
+                    $teacher->save();        
+                    
+                    return redirect('/teachers');
+        
+
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    $teacher = Teacher::findOrFail($id);
+                    $teacher->estado = 1;  
+                    $teacher->leave_at = date("Y-m-d H:i:s");        
+                    $teacher->save();        
+                    
+                    return redirect('/teachers');
+        
+
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    $teacher = Teacher::findOrFail($id);
+                    $teacher->estado = 1;  
+                    $teacher->leave_at = date("Y-m-d H:i:s");        
+                    $teacher->save();        
+                    
+                    return redirect('/teachers');
+        
+
+                }
+            }
+            return redirect('/teachers')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
+        
     }
 }

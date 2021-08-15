@@ -5,63 +5,162 @@
 
     <h3>Gestión de Horarios</h3>
     <hr>
-
-    <div class="container row text-right">        
-        <a href="/horario/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
-    </div>
-
+    {{date('w')}}
     <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Horarios</h3>
-        </div>
-        <!-- /.box-header -->
+        <div class="box-header"><h3 class="box-title">Horarios</h3> </div>
         <div class="box-body">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th class="text-center">Vigilante</th>
-                            <th colspan="2" class="text-center">Inicio</th>
-                            <th colspan="2" class="text-center">Finalización</th>
-                            <th colspan="2" class="text-center">Opciones</th>
+            <div class="table table-responsive">
+
+                <table class="table">
+                    <thead class="bg-light-blue  color-palette">
+                        <tr>
+                            <th>Días</th>
+                            <th>Turno mañana <span class="label label-primary">(6:00 AM - 6:00 PM)</span></th>
+                            <th>Turno noche <span class="label label-primary">(6:00 PM - 6:00 AM día siguiente)</span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($horarios as $horario)
-                        <tr>
-                            <td>{{ $vigilantes->find($horario->user_id)->name." ".$vigilantes->find($horario->user_id)->lastname}}</td>
-                            <td>{{ $dias[$horario->dia_semana_inicio] }}</td>
-                            <td>{{ date("g:i a",strtotime($horario->hora_inicio)) }}</td>
-                            <td>{{ $dias[$horario->dia_semana_fin] }}</td>
-                            <td>{{ date("g:i a",strtotime($horario->hora_final)) }}</td>
-                            <td></td>
-                            {{-- <td><a href="/horario/{{$horario->id}}/edit" class="btn btn-warning">Editar</a></td> --}}
-                            <td><a href="/horario/{{$horario->id}}/confirmDelete" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
-                        </tr>
+                        @php $contador = 1; @endphp
+
+                        @foreach ($dias as $dia)
+
+                            <tr>
+                                <td>{{$dia}}</td>
+
+                                <td>
+                                    @foreach ($horarios as $item)
+                                        @if ($item->turno == $contador)
+                                            @foreach ($vigilantes as $vigilante)
+                                                @if ($vigilante->id == $item->user_id)
+                                                    <a href="/horario/{{$item->id}}/confirmDelete" class="btn bg-maroon btn-sm ">
+                                                        {{$vigilante->name." ".$vigilante->lastname}} <i class="fa fa-remove"></i>
+                                                    </a>                                                    
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                    
+                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
+                                        <i class="fa fa-plus"></i>
+                                        
+                                    </button>
+                                </td>
+
+                                <div class="modal fade" id="modal-add{{$contador}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="/horario" method="post">
+                                                @csrf
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Asignar vigilante a este turno {{$contador }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label for="user_id">Seleccione vigilante</label>
+                                                        <select name="user_id" id="user_id" class="form-control" required>
+                                                            @foreach ($vigilantes as $vigilante)
+                                                                <option value="{{$vigilante->id}}" >{{$vigilante->name." ".$vigilante->lastname}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input type="hidden" name="turno" value="{{$contador}}">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-remove"></i> Cerrar</button>
+                                                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                @php $contador++; @endphp
+
+
+                                <td>
+                                    @foreach ($horarios as $item)
+                                        @if ($item->turno == $contador)
+                                            @foreach ($vigilantes as $vigilante)
+                                                @if ($vigilante->id == $item->user_id)
+                                                    <a href="/horario/{{$item->id}}/confirmDelete" class="btn bg-purple btn-sm ">
+                                                        {{$vigilante->name." ".$vigilante->lastname}} <i class="fa fa-remove"></i>
+                                                    </a>                                                    
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                    
+                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
+                                        <i class="fa fa-plus"></i>
+                                        
+                                    </button>
+                                </td>
+
+                                <div class="modal fade" id="modal-add{{$contador}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="/horario" method="post">
+                                                @csrf
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Asignar vigilante a este turno {{$contador }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label for="user_id">Seleccione vigilante</label>
+                                                        <select name="user_id" id="user_id" class="form-control" required>
+                                                            @foreach ($vigilantes as $vigilante)
+                                                                <option value="{{$vigilante->id}}" >{{$vigilante->name." ".$vigilante->lastname}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input type="hidden" name="turno" value="{{$contador}}">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-remove"></i> Cerrar</button>
+                                                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @php $contador++; @endphp
+                            </tr>
                             
+
                         @endforeach
+
+
+                        
+
                     </tbody>
                 </table>
-            </div>
-        </div>
 
-        <!-- /.box-body -->
-        <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-                {!! $horarios->render() !!}
-            </ul>
+            </div>
+
+        </div>
+        <div class="box-footer">
+            ...
         </div>
     </div>
 
 
-
-
-
-    
-
-    
 
 
 
 </div>
 @endsection
+
+
+

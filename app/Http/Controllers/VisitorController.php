@@ -6,6 +6,7 @@ use App\Office;
 use App\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Horario;
 
 class VisitorController extends Controller
 {
@@ -24,6 +25,8 @@ class VisitorController extends Controller
     {
         $visitors = Visitor::orderByDesc("id")->paginate(10);
         return view('visitors.index', compact('visitors'));
+
+
     }
 
     /**
@@ -33,9 +36,33 @@ class VisitorController extends Controller
      */
     public function create()
     {
-        $offices = Office::all();
+        
 
-        return view('visitors.create', ['offices'=>$offices]);
+        if (Auth::user()->role_id == 1 ) {
+            $offices = Office::all();
+            return view('visitors.create', ['offices'=>$offices]);
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    $offices = Office::all();
+                    return view('visitors.create', ['offices'=>$offices]);
+        
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    $offices = Office::all();
+                    return view('visitors.create', ['offices'=>$offices]);
+        
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    $offices = Office::all();
+                    return view('visitors.create', ['offices'=>$offices]);
+        
+                }
+            }
+            return redirect('/visitors')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
+
     }
 
     /**
@@ -78,9 +105,28 @@ class VisitorController extends Controller
      */
     public function edit($id)
     {
-        $offices = Office::all();
+        
+        if (Auth::user()->role_id == 1 ) {
+            $offices = Office::all();
+            return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    $offices = Office::all();
+                    return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    $offices = Office::all();
+                    return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    $offices = Office::all();
+                    return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
+                }
+            }
+            return redirect('/visitors')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
 
-        return view('visitors.edit', ['visitor'=>Visitor::findOrFail($id), 'offices'=>$offices]);
     }
 
     /**
@@ -129,28 +175,75 @@ class VisitorController extends Controller
 
 
     public function confirmDelete($id){
-        return view('visitors.confirmDelete', ['visitor' => Visitor::findOrFail($id)]);
+        
+
+        if (Auth::user()->role_id == 1 ) {
+            return view('visitors.confirmDelete', ['visitor' => Visitor::findOrFail($id)]);
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    return view('visitors.confirmDelete', ['visitor' => Visitor::findOrFail($id)]);
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    return view('visitors.confirmDelete', ['visitor' => Visitor::findOrFail($id)]);
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    return view('visitors.confirmDelete', ['visitor' => Visitor::findOrFail($id)]);
+                }
+            }
+            return redirect('/visitors')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
     }
 
     public function marcarSalida($id){
 
-        $visitor = Visitor::findOrFail($id);
-        $visitor->estado = 1;  
-        $visitor->leave_at = date("Y-m-d H:i:s");        
-        $visitor->save();
         
-        return redirect('/visitors');
+
+        if (Auth::user()->role_id == 1 ) {
+            $visitor = Visitor::findOrFail($id);
+            $visitor->estado = 1;  
+            $visitor->leave_at = date("Y-m-d H:i:s");        
+            $visitor->save();        
+            return redirect('/visitors');
+        } else {
+            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+            foreach ($misHorarios as $item) {
+    
+                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                    $visitor = Visitor::findOrFail($id);
+                    $visitor->estado = 1;  
+                    $visitor->leave_at = date("Y-m-d H:i:s");        
+                    $visitor->save();        
+                    return redirect('/visitors');
+        
+                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                    $visitor = Visitor::findOrFail($id);
+                    $visitor->estado = 1;  
+                    $visitor->leave_at = date("Y-m-d H:i:s");        
+                    $visitor->save();        
+                    return redirect('/visitors');
+        
+                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                    $visitor = Visitor::findOrFail($id);
+                    $visitor->estado = 1;  
+                    $visitor->leave_at = date("Y-m-d H:i:s");        
+                    $visitor->save();        
+                    return redirect('/visitors');
+        
+                }
+            }
+            return redirect('/visitors')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        }
+
+
     }
 
 
     public function historialVisitantes($id)
     {
         $v = Visitor::findOrFail($id);
-
-        //$visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc'))->get();
         $visits = Visitor::where('dni', $v->dni)->orderBy('created_at', 'desc')->paginate(5);
-
-
         return view('visitors.historial', compact('visits'));
     }
 

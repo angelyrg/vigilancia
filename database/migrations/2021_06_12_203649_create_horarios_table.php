@@ -17,13 +17,9 @@ class CreateHorariosTable extends Migration
             $table->increments('id');
 
             $table -> integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('user_id')->references('id')->on('users');
             
-            $table -> integer('dia_semana_inicio');
-            $table -> time('hora_inicio');
-
-            $table -> integer('dia_semana_fin');
-            $table -> time('hora_final');    
+            $table->integer('turno');
 
             $table->timestamps();
         });

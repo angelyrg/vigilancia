@@ -6,7 +6,6 @@ use App\Attendance;
 use App\Horario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Session\SessionManager;
 
 class AttendanceController extends Controller
 {
@@ -20,31 +19,46 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
 
-        $attendances = Attendance::where('user_id', Auth::user()->id)->orderByDesc("id")->paginate(10);
+        if (Auth::user()->role_id == 1){
+            $attendances = Attendance::orderByDesc("id")->paginate(10); 
+        }else{
+            $attendances = Attendance::where('user_id', Auth::user()->id)->orderByDesc("id")->paginate(10);
+        }
         $dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 
-        // $attendances = $attendances::paginate(10);
-
+        //print_r($attendances);
+        // foreach ($attendances as $key) {
+        //     echo $key;
+        // }
         return view('attendance.index', compact('attendances', 'dias'));
+
+
     }
 
 
-    public function create( SessionManager $sessionManager)
+    public function create()
     {
-        $last = Attendance::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+        $misAsistencias = Attendance::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
 
-        $validarDia = Horario::where('user_id', Auth::user()->id)
-                                ->where(function($query) {
-                                    $query->where('dia_semana_inicio', date('w'))->where('hora_inicio', '<=', date("H:i:s"))
-                                            ->orWhere('dia_semana_fin', date('w'))->where('hora_final', '>=', date("H:i:s"));
-                                }) ->get();
-  
-        if (count($validarDia)== 0) {
-            $sessionManager->flash('message', 'No tiene turno asignado para este momento');
-        } 
-        return view('attendance.create', ['lastRegister' => $last]);
+
+        $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
         
-        
+
+        foreach ($misHorarios as $item) {
+            //echo $item;
+            if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+                return view('attendance.create', ['miHorario' => $item, 'misAsistencias' => $misAsistencias]);
+
+            }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+                return view('attendance.create', ['miHorario' => $item, 'misAsistencias' => $misAsistencias]);
+
+            }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+                return view('attendance.create', ['miHorario' => $item, 'misAsistencias' => $misAsistencias]);
+
+            }
+        }
+
+        return redirect('/attendance')->with('message', 'Usted no está en su horario de trabajo.');
 
     }
 
@@ -53,7 +67,6 @@ class AttendanceController extends Controller
     {
 
         $attendance = new Attendance();
-        $attendance->dia_semana = date('w');
         $attendance->estado = 0;
         $attendance->user_id = Auth::user()->id;
         $attendance->save();
@@ -65,7 +78,6 @@ class AttendanceController extends Controller
 
     public function update(Request $request, Attendance $attendance)
     {
-
 
         $validatedData = $request->validate([
             'user_id' => 'required|numeric',

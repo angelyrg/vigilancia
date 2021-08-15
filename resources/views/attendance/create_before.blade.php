@@ -1,30 +1,37 @@
 @extends('layouts.adminlte')
 
-
-
 @section('content')
+
 
 
     <div class="container col-md-6 col-md-offset-3" style="padding-top: .90em;">
         
+
         <div class="box box-success ">
             <div class="box-header with-border">
                 <h3 class="box-title">Registrar mi asistencia</h3>
             </div>
-            @if ($misAsistencias == null || $misAsistencias->estado == 1)
 
-                <form method="POST" action="/attendance">
-                    @csrf
-                    @method('POST')
-
-            @elseif ($misAsistencias->estado == 0 )
-                <form method="POST" action="/attendance/{{$misAsistencias->id}}">
-                    @csrf
-                    @method('put')
+            @if ($lastRegister != null )
+                                
+                @if ($lastRegister->estado == 1 )
+                    <form method="POST" action="/attendance">
+                        @csrf
+                        @method('POST')
+                @else
+                    <form method="POST" action="/attendance/{{$lastRegister->id}}">
+                        @csrf
+                        @method('put')
+                @endif                
+            @else
+            <form method="POST" action="/attendance">
+                @csrf
+                @method('POST')            
             @endif
-
+                
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
 
+                
 
                 <div class="box-body" style="margin-top: .50em;">
                     <div class="row container-fluid text-center" >
@@ -64,9 +71,9 @@
 
                             @else
 
-                                @if ($misAsistencias != null )
+                                @if ($lastRegister != null )
                             
-                                    @if ($misAsistencias->estado == 1)
+                                    @if ($lastRegister->estado == 1)
                                             <button type="submit" id="bntInicial" class="btn btn-success" style="width:120px; height:100px; border-radius:7px;" >
                                                 <i class="fa fa-sign-in fa-3x" aria-hidden="true" ></i><br>
                                                 Registrar ingreso
@@ -86,6 +93,8 @@
                             @endif
 
 
+
+         
                         </div>
   
                     </div>
@@ -95,14 +104,13 @@
 
                 <div class="box-footer">
                     <h4>Última vez:</h4>
+                    @if ($lastRegister != null )
 
-                    @if ($misAsistencias != null )
-
-                        @if ($misAsistencias->estado == 1)
-                            <span class="label label-info"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $misAsistencias->created_at->format('d/m/Y h:i:s A')}}</label> <br>
-                            <span class="label label-info"><i class="fa fa-sign-out"></i></span> Salida : <label> {{ $misAsistencias->updated_at->format('d/m/Y h:i:s A')}}</label> 
+                        @if ($lastRegister->estado == 1)
+                            <span class="label label-info"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:i:s A')}}</label> <br>
+                            <span class="label label-info"><i class="fa fa-sign-out"></i></span> Salida : <label> {{ $lastRegister->updated_at->format('d/m/Y h:i:s A')}}</label> 
                         @else
-                            <span class="label label-success"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $misAsistencias->created_at->format('d/m/Y h:i:s A')}}</label> 
+                            <span class="label label-success"><i class="fa fa-sign-in"></i></span> Ingreso : <label> {{ $lastRegister->created_at->format('d/m/Y h:i:s A')}}</label> 
                         @endif
                     @else
                         <span class="label label-info"><i class="fa fa-sign-in"></i></span> No hay registro previos <br>
@@ -205,4 +213,3 @@ setInterval(udateTime, 1000);
 
     </script>
 @endsection
-

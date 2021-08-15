@@ -48,15 +48,12 @@ class UserController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8|unique:users',
             'phone' => 'required|numeric|digits:9',
             'role_id' => 'required|numeric|min:1|max:2',            
-            // 'email' => 'string|max:100|unique:users',
         ]);
 
         $user = new User;
@@ -65,7 +62,6 @@ class UserController extends Controller
         $user->lastname = $validatedData['lastname'];
         $user->dni = $validatedData['dni'];
         $user->phone = $validatedData['phone'];
-        // $user->email = $validatedData['email'];
         $user->role_id = $validatedData['role_id'];
         $user->password = bcrypt($validatedData['dni']);
         $user->save();
@@ -102,14 +98,12 @@ class UserController extends Controller
             'phone' => 'required|numeric|digits:9',
             'role_id' => 'required|numeric|min:1|max:2',
             'active' => 'required|bool',
-            // 'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
         
         $user->name = $validatedData['name'];
         $user->lastname = $validatedData['lastname'];
         $user->dni = $validatedData['dni'];
         $user->phone = $validatedData['phone'];
-        // $user->email = $validatedData['email'];
         $user->role_id = $validatedData['role_id'];
         $user->active = $validatedData['active'];
 
