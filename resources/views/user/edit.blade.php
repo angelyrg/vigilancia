@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
 
-    <h3>Editar usuario</h3>
-    <hr>
+    {{-- <h3>Editar usuario</h3>
+    <hr> --}}
     <div class="container">
 
         <div class="col-md-6 col-md-offset-3">
-            <div class="box box-primary">
+            <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Datos del usuario</h3>
+                    <h3 class="box-title">Editar datos del usuario</h3>
                 </div>
     
                 <div class="box-body">
@@ -76,6 +76,39 @@
                         </div>
 
 
+
+                        <div class="form-group row {{ $errors->has('contract_start') ? ' has-error' : '' }}">
+                            
+                            <label for="contract_start" class="col-md-4 col-form-label text-md-right" >{{ __('Inicio de Contrato') }}</label>
+    
+                            <div class="col-md-6">
+                                <input id="contract_start" type="date" class="form-control" name="contract_start" value="@if(!old('contract_start')){{$user->contract_start}}@else{{old('contract_start')}}@endif" required >
+    
+                                @if ($errors->has('contract_start'))
+                                    <span class="help-block" role="alert">
+                                        <strong>{{ $errors->first('contract_start') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row {{ $errors->has('contract_end') ? ' has-error' : '' }}">
+                            
+                            <label for="contract_end" class="col-md-4 col-form-label text-md-right" >{{ __('Inicio de Contrato') }}</label>
+    
+                            <div class="col-md-6">
+                                <input id="contract_end" type="date" class="form-control" name="contract_end" value="@if(!old('contract_end')){{$user->contract_end}}@else{{old('contract_end')}}@endif" required >
+    
+                                @if ($errors->has('contract_end'))
+                                    <span class="help-block" role="alert">
+                                        <strong>{{ $errors->first('contract_end') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group row {{ $errors->has('role_id') ? ' has-error' : '' }}">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
 
@@ -137,7 +170,7 @@
                             <div class="col text-right">
                                 <a href="/user" class="btn btn-default"><i class="fa fa-remove"></i> Cancelar</a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-save"></i> Guardar
+                                    <i class="fa fa-save"></i> Actualizar
                                 </button>
                             </div>
                         </div>

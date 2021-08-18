@@ -14,7 +14,7 @@
                     <thead class="bg-light-blue  color-palette">
                         <tr>
                             <th>Días</th>
-                            <th>Turno mañana <span class="label label-primary">(6:00 AM - 6:00 PM)</span></th>
+                            <th>Turno día <span class="label label-primary">(6:00 AM - 6:00 PM)</span></th>
                             <th>Turno noche <span class="label label-primary">(6:00 PM - 6:00 AM día siguiente)</span></th>
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Asignar vigilante a este turno {{$contador }}</h4>
+                                                    <h4 class="modal-title">Asignar vigilante a este turno </h4>
                                                 </div>
                                                 <div class="modal-body">
 
@@ -109,7 +109,7 @@
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Asignar vigilante a este turno {{$contador }}</h4>
+                                                    <h4 class="modal-title">Asignar vigilante a este turno </h4>
                                                 </div>
                                                 <div class="modal-body">
 

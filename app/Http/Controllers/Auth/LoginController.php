@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Horario;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -10,31 +11,13 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -45,19 +28,23 @@ class LoginController extends Controller
         return 'dni';
     }
 
-    /**
-     * Get the needed authorization credentials from the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     protected function credentials(Request $request)
-    {
-        return ['dni' => $request->dni, 'password' => $request->password, 'active' => '1'];
+    {   
+        //$turno = Horario::findOrFail($request->id);
+
+        return [
+            'dni' => $request->dni,
+            'password' => $request->password, 
+            'active' => '1',
+            // 'turno' => 
+            //     function ($attribute, $value, $fail) use ($request) {
+            //         if ( !($value==0 && $request['dia_semana_inicio']==6)){
+            //             if ( $value < $request['dia_semana_inicio'] ) {
+            //                 $fail('El día de fin del turno debe ser posterior o igual al día inicial.');
+            //             }
+            //         }
+            //     },
+            ];
     }
-
-
-
-    
     
 }

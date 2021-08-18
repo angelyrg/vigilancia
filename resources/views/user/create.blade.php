@@ -2,6 +2,18 @@
 
 @section('content')
 
+<section class="content-header">
+    <h1>
+        Gestión de usuarios
+        <small>Registrar nuevo usuario</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="/user">Usuarios</a></li>
+        <li class="active">Nuevo</li>
+    </ol>
+</section>
+
     <div class="container col-md-6 col-md-offset-3">
 
         <div class="box box-primary ">
@@ -64,46 +76,82 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class=" col-md-6">
     
-                        <div class="form-group {{ $errors->has('dni') ? ' has-error' : '' }}">
-                            <label for="dni" >{{ __('DNI') }}</label>
+                                <div class="form-group {{ $errors->has('dni') ? ' has-error' : '' }}">
+                                    
+                                    <label for="dni" >{{ __('DNI') }}</label>
+            
+                                    <div >
+                                        <input id="dni" type="text" class="form-control" name="dni" value="{{ old('dni') }}" required maxlength="8" pattern="[0-9]{8}" title="Ingrese un número de DNI correcto">
+            
+                                        @if ($errors->has('dni'))
+                                            <span class="help-block" role="alert">
+                                                <strong>{{ $errors->first('dni') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
     
-                            <div >
-                                <input id="dni" type="text" class="form-control" name="dni" value="{{ old('dni') }}" required maxlength="8" pattern="[0-9]{8}" title="Ingrese un número de DNI correcto">
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
+                                    <label for="phone" >{{ __('Celular') }}</label>
+            
+                                    <div >
+                                        <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required maxlength="9" pattern="[0-9]{9}" title="Ingrese un número de celular correcto">
+            
+                                        @if ($errors->has('phone'))
+                                            <span class="help-block" role="alert">
+                                                <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
     
-                                @if ($errors->has('dni'))
-                                    <span class="help-block" role="alert">
-                                        <strong>{{ $errors->first('dni') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
+
+
+                        <div class="row">
+                            <div class=" col-md-6">
     
-                        {{-- <div class="form-group ">
-                            <label for="email" >{{ __('Correo electrónico') }}</label>
-                            <div >
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-                                @if ($errors->has('email'))
-                                    <span class="help-block" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                <div class="form-group {{ $errors->has('contract_start') ? ' has-error' : '' }}">
+                                    
+                                    <label for="contract_start" >{{ __('Inicio de Contrato') }}</label>
+            
+                                    <div >
+                                        <input id="contract_start" type="date" class="form-control" name="contract_start" value="{{ old('contract_start') }}" required >
+            
+                                        @if ($errors->has('contract_start'))
+                                            <span class="help-block" role="alert">
+                                                <strong>{{ $errors->first('contract_start') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        </div> --}}
     
-                        <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" >{{ __('Celular') }}</label>
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('contract_end') ? ' has-error' : '' }}">
+                                    <label for="contract_end" >{{ __('Fin del contrato') }}</label>
+            
+                                    <div >
+                                        <input id="contract_end" type="date" class="form-control" name="contract_end" value="{{ old('contract_end') }}" required >
+            
+                                        @if ($errors->has('contract_end'))
+                                            <span class="help-block" role="alert">
+                                                <strong>{{ $errors->first('contract_end') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
     
-                            <div >
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required maxlength="9" pattern="[0-9]{9}" title="Ingrese un número de celular correcto">
-    
-                                @if ($errors->has('phone'))
-                                    <span class="help-block" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
+
     
                         <div class="form-group {{ $errors->has('role_id') ? ' has-error' : '' }}">
                             <label for="phone" >{{ __('Rol') }}</label>

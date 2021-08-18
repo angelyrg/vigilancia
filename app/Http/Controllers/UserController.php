@@ -53,42 +53,37 @@ class UserController extends Controller
             'lastname' => 'required|string|max:100',
             'dni' => 'required|numeric|digits:8|unique:users',
             'phone' => 'required|numeric|digits:9',
-            'role_id' => 'required|numeric|min:1|max:2',            
+            'role_id' => 'required|numeric|min:1|max:2',
+            'contract_start' => 'required|date',
+            'contract_end' => [
+                'required','date',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ( $value < $request['contract_start'] ) {
+                        $fail('El día de finalización del contrato debe ser posterior al inicio del contrato.');
+                    }
+                },
+            ],
+            
         ]);
 
         $user = new User;
-        
         $user->name = $validatedData['name'];
         $user->lastname = $validatedData['lastname'];
         $user->dni = $validatedData['dni'];
         $user->phone = $validatedData['phone'];
         $user->role_id = $validatedData['role_id'];
+        $user->contract_start = $validatedData['contract_start'];
+        $user->contract_end = $validatedData['contract_end'];
         $user->password = bcrypt($validatedData['dni']);
         $user->save();
-        
-        
         return redirect('/user');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, $id)
     {
         return view('user.edit', ['user'=>User::findOrFail($id), 'roles' => Role::all()]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $validatedData = $request->validate([
@@ -98,6 +93,16 @@ class UserController extends Controller
             'phone' => 'required|numeric|digits:9',
             'role_id' => 'required|numeric|min:1|max:2',
             'active' => 'required|bool',
+            'contract_start' => 'required|date',
+            'contract_end' => [
+                'required','date',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ( $value < $request['contract_start'] ) {
+                        $fail('El día de finalización del contrato debe ser posterior al inicio del contrato.');
+                    }
+                },
+            ],
+
         ]);
         
         $user->name = $validatedData['name'];
@@ -107,9 +112,11 @@ class UserController extends Controller
         $user->role_id = $validatedData['role_id'];
         $user->active = $validatedData['active'];
 
-        $user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar el dni si está comentado
+        $user->contract_start = $validatedData['contract_start'];
+        $user->contract_end = $validatedData['contract_end'];
+
+        $user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar si esta línea está comentada
         $user->save();
-        
 
         return redirect('/user');
     }
@@ -130,6 +137,5 @@ class UserController extends Controller
     public function confirmDelete($id){
         return view('user.confirmDelete', ['user' => User::findOrFail($id)]);
     }
-
 
 }

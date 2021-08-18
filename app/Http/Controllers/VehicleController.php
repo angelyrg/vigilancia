@@ -35,25 +35,8 @@ class VehicleController extends Controller
      */
     public function create()
     {
+        return view('vehicles.create');
         
-
-        if (Auth::user()->role_id == 1 ) {
-            return view('vehicles.create');
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('vehicles.create');
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('vehicles.create');
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('vehicles.create');
-                }
-            }
-            return redirect('/vehicles')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
     }
 
     /**
@@ -94,16 +77,7 @@ class VehicleController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -113,25 +87,7 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        
-
-        if (Auth::user()->role_id == 1 ) {
-            return view('vehicles.edit', ['vehicle'=>Vehicle::findOrFail($id)]);
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('vehicles.edit', ['vehicle'=>Vehicle::findOrFail($id)]);
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('vehicles.edit', ['vehicle'=>Vehicle::findOrFail($id)]);
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('vehicles.edit', ['vehicle'=>Vehicle::findOrFail($id)]);
-                }
-            }
-            return redirect('/vehicles')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
+        return view('vehicles.edit', ['vehicle'=>Vehicle::findOrFail($id)]);
     }
 
     /**
@@ -187,63 +143,17 @@ class VehicleController extends Controller
     
     public function confirmDelete($id){
         
-
-        if (Auth::user()->role_id == 1 ) {
-            return view('vehicles.confirmDelete', ['vehicle' => Vehicle::findOrFail($id)]);
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('vehicles.confirmDelete', ['vehicle' => Vehicle::findOrFail($id)]);
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('vehicles.confirmDelete', ['vehicle' => Vehicle::findOrFail($id)]);
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('vehicles.confirmDelete', ['vehicle' => Vehicle::findOrFail($id)]);
-                }
-            }
-            return redirect('/vehicles')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
+        return view('vehicles.confirmDelete', ['vehicle' => Vehicle::findOrFail($id)]);
 
     }
 
     public function marcarSalida($id){
 
+        $vehicles = Vehicle::findOrFail($id);
+        $vehicles->estado = 1;  
+        $vehicles->leave_at = date("Y-m-d H:i:s");        
+        $vehicles->save();        
+        return redirect('/vehicles');
         
-
-        if (Auth::user()->role_id == 1 ) {
-            $vehicles = Vehicle::findOrFail($id);
-            $vehicles->estado = 1;  
-            $vehicles->leave_at = date("Y-m-d H:i:s");        
-            $vehicles->save();        
-            return redirect('/vehicles');
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    $vehicles = Vehicle::findOrFail($id);
-                    $vehicles->estado = 1;  
-                    $vehicles->leave_at = date("Y-m-d H:i:s");        
-                    $vehicles->save();        
-                    return redirect('/vehicles');
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    $vehicles = Vehicle::findOrFail($id);
-                    $vehicles->estado = 1;  
-                    $vehicles->leave_at = date("Y-m-d H:i:s");        
-                    $vehicles->save();        
-                    return redirect('/vehicles');
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    $vehicles = Vehicle::findOrFail($id);
-                    $vehicles->estado = 1;  
-                    $vehicles->leave_at = date("Y-m-d H:i:s");        
-                    $vehicles->save();        
-                    return redirect('/vehicles');
-                }
-            }
-            return redirect('/vehicles')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
-
     }
 }

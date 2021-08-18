@@ -33,34 +33,28 @@ class BorrowingController extends Controller
      */
     public function create()
     {
-        
+        return view('borrowings.create');
 
-        if (Auth::user()->role_id == 1 ) {
-            return view('borrowings.create');
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
+        // if (Auth::user()->role_id == 1 ) {
+        //     return view('borrowings.create');
+        // } else {
+        //     $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
+        //     foreach ($misHorarios as $item) {
     
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('borrowings.create');
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('borrowings.create');
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('borrowings.create');
-                }
-            }
-            return redirect('/borrowings')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
+        //         if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
+        //             return view('borrowings.create');
+        //         }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
+        //             return view('borrowings.create');
+        //         }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
+        //             return view('borrowings.create');
+        //         }
+        //     }
+        //     return redirect('/borrowings')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
+        // }
 
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -104,25 +98,7 @@ class BorrowingController extends Controller
      */
     public function edit($id)
     {
-        
-
-        if (Auth::user()->role_id == 1 ) {
-            return view('borrowings.edit', ['borrowing'=>Borrowing::findOrFail($id)]);
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('borrowings.edit', ['borrowing'=>Borrowing::findOrFail($id)]);
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('borrowings.edit', ['borrowing'=>Borrowing::findOrFail($id)]);
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('borrowings.edit', ['borrowing'=>Borrowing::findOrFail($id)]);
-                }
-            }
-            return redirect('/borrowings')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
+        return view('borrowings.edit', ['borrowing'=>Borrowing::findOrFail($id)]);
     }
 
     /**
@@ -170,66 +146,17 @@ class BorrowingController extends Controller
 
 
     public function confirmDelete($id){
-        
-
-        if (Auth::user()->role_id == 1 ) {
-            return view('borrowings.confirmDelete', ['borrowing' => Borrowing::findOrFail($id)]);
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    return view('borrowings.confirmDelete', ['borrowing' => Borrowing::findOrFail($id)]);
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    return view('borrowings.confirmDelete', ['borrowing' => Borrowing::findOrFail($id)]);
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    return view('borrowings.confirmDelete', ['borrowing' => Borrowing::findOrFail($id)]);
-                }
-            }
-            return redirect('/borrowings')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
+        return view('borrowings.confirmDelete', ['borrowing' => Borrowing::findOrFail($id)]);
     }
 
     public function devolucion($id){
 
+        $borrowing = Borrowing::findOrFail($id);
+        $borrowing->estado = 1;  
+        $borrowing->fecha_devolucion = date("Y-m-d H:i:s");        
+        $borrowing->save();        
+        return redirect('/borrowings');
        
-
-        if (Auth::user()->role_id == 1 ) {
-            $borrowing = Borrowing::findOrFail($id);
-            $borrowing->estado = 1;  
-            $borrowing->fecha_devolucion = date("Y-m-d H:i:s");        
-            $borrowing->save();        
-            return redirect('/borrowings');
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    $borrowing = Borrowing::findOrFail($id);
-                    $borrowing->estado = 1;  
-                    $borrowing->fecha_devolucion = date("Y-m-d H:i:s");        
-                    $borrowing->save();        
-                    return redirect('/borrowings');
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    $borrowing = Borrowing::findOrFail($id);
-                    $borrowing->estado = 1;  
-                    $borrowing->fecha_devolucion = date("Y-m-d H:i:s");        
-                    $borrowing->save();        
-                    return redirect('/borrowings');
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    $borrowing = Borrowing::findOrFail($id);
-                    $borrowing->estado = 1;  
-                    $borrowing->fecha_devolucion = date("Y-m-d H:i:s");        
-                    $borrowing->save();        
-                    return redirect('/borrowings');
-                }
-            }
-            return redirect('/borrowings')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
-
-        
     }
 
 

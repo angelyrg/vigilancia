@@ -34,31 +34,8 @@ class SupportController extends Controller
      */
     public function create()
     {
-        
-
-        if (Auth::user()->role_id == 1 ) {
-            $vigilantes = User::all()->where('role_id', 2);
-            return view('supports.create', ['vigilantes'=>$vigilantes]);
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.create', ['vigilantes'=>$vigilantes]);
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.create', ['vigilantes'=>$vigilantes]);
-
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.create', ['vigilantes'=>$vigilantes]);
-
-                }
-            }
-            return redirect('/supports')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
-
+        $vigilantes = User::all()->where('role_id', 2);
+        return view('supports.create', ['vigilantes'=>$vigilantes]);
     }
 
     /**
@@ -112,32 +89,8 @@ class SupportController extends Controller
      */
     public function edit($id)
     {
-
-
-        if (Auth::user()->role_id == 1 ) {
-            $vigilantes = User::all()->where('role_id', 2);
-            return view('supports.edit', ['support'=>Support::findOrFail($id), 'vigilantes'=>$vigilantes]);
-    
-        } else {
-            $misHorarios = Horario::where('user_id', Auth::user()->id)->get();
-            foreach ($misHorarios as $item) {
-    
-                if (date('w')*2 + 1 == $item['turno'] && date('H:m:i') >= '06:00:00' && date('H:m:i') <= '18:00:00' ) {
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.edit', ['support'=>Support::findOrFail($id), 'vigilantes'=>$vigilantes]);
-            
-                }else if(date('w')*2 + 2 == $item['turno'] && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '23:59:59'){
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.edit', ['support'=>Support::findOrFail($id), 'vigilantes'=>$vigilantes]);
-            
-                }else if($item['turno'] == 14 && date('H:m:i') >= '00:00:00' && date('H:m:i') <= '06:00:00'){
-                    $vigilantes = User::all()->where('role_id', 2);
-                    return view('supports.edit', ['support'=>Support::findOrFail($id), 'vigilantes'=>$vigilantes]);
-            
-                }
-            }
-            return redirect('/supports')->with('messageNoHorario', 'Usted no está en su horario de trabajo.');
-        }
+        $vigilantes = User::all()->where('role_id', 2);
+        return view('supports.edit', ['support'=>Support::findOrFail($id), 'vigilantes'=>$vigilantes]);
 
     }
 

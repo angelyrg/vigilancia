@@ -17,8 +17,8 @@
 
         <div class="col-md-4 ">
             <div class="box box-widget widget-user">
-                <div class="widget-user-header bg-aqua-active">
-                    <h3 class="widget-user-username">Gilmer Simón Matos Vila</h3>
+                <div class="widget-user-header bg-aqua-active ">
+                    <h3 class="widget-user-username ">Mg. Ing. Gilmer S. Matos Vila </h3>
                     <h5 class="widget-user-desc">SCRUM MASTER</h5>
                 </div>
                 <div class="widget-user-image">
@@ -52,7 +52,7 @@
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-green">
                     <h3 class="widget-user-username">Angel G. Yaranga Garcia</h3>
-                    <h5 class="widget-user-desc">SCRUM MASTER</h5>
+                    <h5 class="widget-user-desc">Team Developer Scrum</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{ asset("img/2017141050.jpg") }}" alt="User Avatar">
@@ -80,7 +80,7 @@
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-green">
                     <h3 class="widget-user-username">John Anderson Carbajal Quispe</h3>
-                    <h5 class="widget-user-desc">SCRUM TEAM</h5>
+                    <h5 class="widget-user-desc">Team Developer Scrum</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{ asset("img/john-carbajal.jpg") }}" alt="User Avatar">
@@ -108,7 +108,7 @@
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-green">
                     <h3 class="widget-user-username">Yeris Nieves Casihue Escobar</h3>
-                    <h5 class="widget-user-desc">SCRUM TEAM</h5>
+                    <h5 class="widget-user-desc">Team Developer Scrum</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{ asset("img/yeris-casihue.jpg") }}" alt="User Avatar">
@@ -136,7 +136,7 @@
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-green">
                     <h3 class="widget-user-username">Rebeca Belito Sullcaray</h3>
-                    <h5 class="widget-user-desc">SCRUM TEAM</h5>
+                    <h5 class="widget-user-desc">Team Developer Scrum</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{ asset("img/rebeca-belito.jpg") }}" alt="User Avatar">

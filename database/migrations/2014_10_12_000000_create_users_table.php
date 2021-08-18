@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('user_photo')->nullable();
             $table->string('password');
             $table->integer('role_id')->unsigned();
+            $table->date('contract_start');
+            $table->date('contract_end');
             $table->boolean('active')->default(true);;
             $table->rememberToken();
             $table->timestamps();

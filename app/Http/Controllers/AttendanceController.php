@@ -26,10 +26,7 @@ class AttendanceController extends Controller
         }
         $dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 
-        //print_r($attendances);
-        // foreach ($attendances as $key) {
-        //     echo $key;
-        // }
+
         return view('attendance.index', compact('attendances', 'dias'));
 
 
