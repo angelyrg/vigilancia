@@ -18,6 +18,11 @@ class User extends Authenticatable
     public function horarios(){
         return $this->hasMany(Horario::class);
     }
+    
+    /**Relacionar con el modelo Asistencia */
+    public function asistencias(){
+        return $this->hasMany(Attendance::class);
+    }
 
     /**Relacionar con el modelo Support */
     public function supports(){

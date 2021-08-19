@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Incident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class IncidentController extends Controller
 {
@@ -16,8 +17,10 @@ class IncidentController extends Controller
 
     public function index()
     {
+        $users = User::all();
+
         $incidents = Incident::orderByDesc("id")->paginate(10);
-        return view('incidents.index', compact('incidents'));
+        return view('incidents.index', compact('incidents', 'users'));
     }
 
 

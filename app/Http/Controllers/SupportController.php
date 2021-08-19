@@ -22,9 +22,11 @@ class SupportController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $supports = Support::orderByDesc("id")->paginate(10);
         $vigilantes = User::all()->where('role_id', 2);
-        return view('supports.index', ['supports'=>$supports, 'vigilantes'=>$vigilantes]);
+        return view('supports.index', ['supports'=>$supports, 'vigilantes'=>$vigilantes, 'users'=>$users]);
     }
 
     /**

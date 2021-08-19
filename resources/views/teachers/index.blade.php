@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     @if (Session::has('messageNoHorario') )
         <div class="alert alert-danger alert-dismissible">
@@ -13,7 +13,7 @@
 
     <h3>Gestión de registros de docentes</h3>
     <hr>
-    <div class="container row text-right">        
+    <div class="container-fluid row text-right">        
         <a href="/teachers/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
@@ -26,10 +26,12 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
+                            <th>Nombres y Apellidos</th>
                             <th>DNI</th>
                             <th>Fecha de ingreso</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Fecha de salida</th>
                             <th>Observación</th>
                             <th>Estado</th>
@@ -40,10 +42,13 @@
                         @foreach ($teachers as $teacher)
                             <tr>
                                 <td>{{$teacher->id}}</td>
-                                <td>{{$teacher->nombres}}</td>
-                                <td>{{$teacher->apellidos}}</td>
+                                <td>{{$teacher->nombres." ".$teacher->apellidos}}</td>
                                 <td>{{$teacher->dni}}</td>
                                 <td>{{$teacher->created_at->format('d/m/Y h:i A')}}</td>
+
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($teacher->login_id)->name}}</td>
+                                @endif
 
                                 @if ($teacher->estado == 0)
                                     <td><span class="label label-warning">Pendiente</span></td>                                    

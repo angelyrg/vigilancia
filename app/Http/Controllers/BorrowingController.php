@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Borrowing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Horario;
+use App\User;
 
 class BorrowingController extends Controller
 {
@@ -22,8 +22,10 @@ class BorrowingController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $borrowings = Borrowing::orderByDesc("id")->paginate(10);
-        return view('borrowings.index', compact('borrowings'));
+        return view('borrowings.index', compact('borrowings', 'users'));
     }
 
     /**

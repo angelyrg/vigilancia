@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     @if (Session::has('messageNoHorario') )
         <div class="alert alert-danger alert-dismissible">
@@ -13,7 +13,7 @@
 
     <h3>Gestión de registros de Vehículos</h3>
     <hr>
-    <div class="container row text-right">        
+    <div class="container-fluid row text-right">        
         <a href="/vehicles/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
@@ -31,6 +31,9 @@
                             <th>Propietario</th>
                             <th>Motivo</th>
                             <th>Fecha de registro</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Fecha de salida</th>
                             <th>Ubicación</th>
                             <th colspan="2">Opciones</th>
@@ -53,6 +56,9 @@
                                     
                                 <td>{{$vehicle->motivo}}</td>
                                 <td>{{$vehicle->created_at->format('d/m/Y h:i A')}}</td>
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($vehicle->login_id)->name}}</td>
+                                @endif
                                 <td>
                                     @if ($vehicle->leave_at == null)
                                         <a href="/vehicles/{{$vehicle->id}}/marcarSalida" class="btn btn-info btn-sm">Marcar salida</a>                                  

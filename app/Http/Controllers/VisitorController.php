@@ -6,7 +6,7 @@ use App\Office;
 use App\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Horario;
+use App\User;
 
 class VisitorController extends Controller
 {
@@ -23,8 +23,10 @@ class VisitorController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $visitors = Visitor::orderByDesc("id")->paginate(10);
-        return view('visitors.index', compact('visitors'));
+        return view('visitors.index', compact('visitors', 'users'));
 
 
     }

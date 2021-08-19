@@ -18,7 +18,7 @@ class HorarioController extends Controller
     public function index()
     {
         $dias = array("0"  => "Domingo","1"  => "Lunes","2"  => "Martes","3"  => "Miércoles","4"  => "Jueves","5"  => "Viernes","6"  => "Sábado");
-        $vigilantes = User::all()->where('role_id', 2)->where('active', 1);
+        $vigilantes = User::all()->where('role_id', 2)->where('active', 1)->where('contract_start', '<=', date('Y-m-d'))->where('contract_end', '>=', date('Y-m-d'));
         $horarios = Horario::all();
         return view("horario.index", ["horarios" => $horarios, 'dias'=>$dias, 'vigilantes' => $vigilantes]);
     }
@@ -27,9 +27,16 @@ class HorarioController extends Controller
 
     public function store(Request $request)
     {
+        //$horariosDelUsuario = Horario::findOrFail($request->user_id);
+
         $validatedData = $request->validate([
             'user_id' => 'required|numeric',
             'turno' => 'required|numeric',
+            // 'turno' => ['required', 'numeric',
+            //     function ($attribute, $value, $fail){
+            //         if ( $value + 1 == $horarios->)
+            //     }
+            //
         ]);
 
         $horario = new Horario;

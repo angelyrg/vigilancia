@@ -40,8 +40,7 @@
                                     @endforeach
                                     
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
-                                        <i class="fa fa-plus"></i>
-                                        
+                                        <i class="fa fa-plus"></i> {{$contador}}
                                     </button>
                                 </td>
 
@@ -95,7 +94,7 @@
                                     @endforeach
                                     
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
-                                        <i class="fa fa-plus"></i>
+                                        <i class="fa fa-plus"></i> {{$contador}}
                                         
                                     </button>
                                 </td>

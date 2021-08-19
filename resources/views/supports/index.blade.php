@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     @if (Session::has('messageNoHorario') )
         <div class="alert alert-danger alert-dismissible">
@@ -15,7 +15,7 @@
 
     <h3>Gestión de registros de apoyo</h3>
     <hr>
-    <div class="container row text-right">        
+    <div class="container-fluid row text-right">        
         <a href="/supports/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
@@ -32,6 +32,9 @@
                             <th>Documento</th>
                             <th>Destino</th>
                             <th>Fecha de registro</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Retorno</th>
 
                             <th>Estado</th>
@@ -46,6 +49,9 @@
                                 <td>{{$support->documento}}</td>
                                 <td>{{$support->destino}}</td>
                                 <td>{{$support->created_at->format('d/m/Y h:i A')}}</td>
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($support->login_id)->name}}</td>
+                                @endif
                                 <td>
                                     @if ($support->estado == 0)
                                         <span class="label label-warning"><i class="fa fa-clock-o"></i> Pendiente</span>                                  

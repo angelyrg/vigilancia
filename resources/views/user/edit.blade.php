@@ -94,7 +94,7 @@
 
                         <div class="form-group row {{ $errors->has('contract_end') ? ' has-error' : '' }}">
                             
-                            <label for="contract_end" class="col-md-4 col-form-label text-md-right" >{{ __('Inicio de Contrato') }}</label>
+                            <label for="contract_end" class="col-md-4 col-form-label text-md-right" >{{ __('Finalización de Contrato') }}</label>
     
                             <div class="col-md-6">
                                 <input id="contract_end" type="date" class="form-control" name="contract_end" value="@if(!old('contract_end')){{$user->contract_end}}@else{{old('contract_end')}}@endif" required >

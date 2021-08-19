@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     @if (Session::has('messageNoHorario') )
         <div class="alert alert-danger alert-dismissible">
@@ -13,7 +13,7 @@
 
     <h4>Gestión de registros de Visitantes</h4>
     <hr>
-    <div class="container row text-right">        
+    <div class="container-fluid row text-right">        
         <a href="/visitors/create" class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
 
@@ -27,6 +27,9 @@
                             <th>Nombres y Apellidos</th>
                             <th>DNI</th>
                             <th>Fecha de ingreso</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Fecha de salida</th>
                             <th>Oficina</th>
                             <th>Motivo</th>
@@ -44,6 +47,9 @@
                                 
                                 <td>{{$visitor->dni}}</td>
                                 <td>{{$visitor->created_at->format('d/m/Y h:i A')}}</td>
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($visitor->login_id)->name}}</td>
+                                @endif
                                 @if ($visitor->estado == 1)
                                     <td>{{date('d/m/Y h:i A', strtotime($visitor->leave_at))}}</td>
                                 @else

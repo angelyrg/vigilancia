@@ -14,7 +14,6 @@
 <section class="content">
     <div class="container-fluid">
     
-    
         <div class="row">
             <div class="col-md-8">
                 <!--  CHART -->
@@ -29,6 +28,27 @@
                     <div class="box-body">
                         <div class="chart">
                             <canvas id="visitorsChart" height="" ></canvas>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+        
+            </div>
+
+            <div class="col-md-4">
+                <!--  CHART -->
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-inbox"></i> Visitantes </h3>            
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="visitorsChartPie" height="" ></canvas>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -73,7 +93,7 @@ function obtenerVisitantes(){
                     {
                         label: 'Cantidad de visitantes',
                         data: ctdVisitantes,
-                        borderColor: '#000',
+                        //borderColor: '#000',
                         backgroundColor: ['#04a45c','#06c3eb','#f46d54','#e0e2e4','#3c8cbc','#f49c14','#80cdd3','#2cb677',],
                     }
                 ]
@@ -82,6 +102,8 @@ function obtenerVisitantes(){
             console.log(myData);
 
             dibujar();
+
+            dibujarPie();
 
         },
         error : function(xhr, status) {
@@ -117,13 +139,43 @@ function dibujar(){
                 },
                 title: {
                     display: true,
-                    text: 'Cantidad de viitantes por oficinas'
+                    text: 'Cantidad de visitantes por oficinas'
                 },
             },
         },
     });
 
 }
+
+function dibujarPie(){
+    var ctx = document.getElementById('visitorsChartPie').getContext('2d');
+    if(visitantesChart != null){
+        visitantesChart.destroy();
+    }
+
+    var promedioEtas = new Chart(ctx, {
+        type: 'pie',
+        data: myData,
+        options: {
+
+            responsive: true,
+
+  
+            plugins: {
+                legend: {
+                    display: false,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Cantidad de visitantes por oficinas'
+                },
+            },
+        },
+    });
+
+}
+
 // Visitantes Chart Fin
 
 

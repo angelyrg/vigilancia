@@ -40,6 +40,9 @@
                     <table class="table table-hover" >
                         <thead class="thead-dark">
                             <tr>
+                                @if (Auth::user()->role_id == 1)
+                                    <th>Vigilante</th>
+                                @endif
                                 <th>Día</th>
                                 <th>Fecha de ingreso</th>
                                 <th>Fecha de salida</th>
@@ -52,7 +55,12 @@
                             
                             @foreach ($attendances as $attendance)
                                 <tr>
-                                    <td>{{$attendance->id}}</td>
+                                    
+                                    @if (Auth::user()->role_id == 1)
+                                        <td>{{$users->find($attendance->user_id)->name." ".$users->find($attendance->user_id)->lastname}}</td>
+                                    @endif
+
+                                    <td>{{$dias [ date("w", strtotime($attendance->created_at) ) ] }}</td>
                                     <td>{{$attendance->created_at->format('d/m/Y h:i:s A')}}</td>
                                     @if ($attendance->estado == 1)
                                         <td>{{$attendance->updated_at->format('d/m/Y h:i:s A')}}</td>

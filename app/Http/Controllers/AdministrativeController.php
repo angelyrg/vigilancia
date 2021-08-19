@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Administrative;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Horario;
+use App\User;
 
 class AdministrativeController extends Controller
 {
@@ -22,8 +22,10 @@ class AdministrativeController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $administrative = Administrative::orderByDesc("id")->paginate(10);
-        return view('administrative.index', compact('administrative'));
+        return view('administrative.index', compact('administrative', 'users'));
     }
 
     /**

@@ -63,10 +63,14 @@
                                 </td>
                                 <td>{{$user->role->description}}</td>
                                 <td>
-                                    @if ($user->active == 1)
-                                        <span class="label label-success">Activo</span>
+                                    @if ($user->contract_start <= date('Y-m-d') && $user->contract_end >= date('Y-m-d'))
+                                        @if ($user->active == 1)
+                                            <span class="label label-success">Activo</span>
+                                        @else
+                                            <span class="label label-danger">Desactivado</span>
+                                        @endif
                                     @else
-                                        <span class="label label-danger">Desactivado</span>
+                                        <span class="label label-default">Contrato caducado</span>                                        
                                     @endif
                                 </td>
                                 <td><a href="/user/{{$user->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>

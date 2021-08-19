@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Horario;
+use App\User;
 
 class TeacherController extends Controller
 {
@@ -22,8 +22,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         $teachers = Teacher::orderByDesc("id")->paginate(10);
-        return view('teachers.index', ['teachers' => $teachers]);
+        return view('teachers.index', ['teachers' => $teachers, 'users'=>$users]);
     }
 
     /**
@@ -32,7 +33,7 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         return view('teachers.create');
     }
 

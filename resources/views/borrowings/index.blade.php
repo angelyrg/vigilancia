@@ -28,6 +28,9 @@
                             <th>Nombre encargado</th>
                             {{-- <th>DNI</th> --}}
                             <th>Fecha de préstamo</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Descripción</th>
                             <th>Fecha de devolución</th>
                             <th>Estado</th>
@@ -41,7 +44,11 @@
                                 <td>{{$borrowing->cantidad}}</td>
                                 <td>{{$borrowing->nombre_encargado}}</td>
                                 {{-- <td>{{$borrowing->dni}}</td> --}}
+                               
                                 <td>{{$borrowing->created_at->format('d/m/Y h:i A')}}</td>
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($borrowing->login_id)->name}}</td>
+                                @endif
                                 <td>{{$borrowing->descripcion}}</td>
                                 <td>
                                     @if ($borrowing->estado == 0)

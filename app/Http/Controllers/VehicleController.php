@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Vehicle;
 use Illuminate\Support\Facades\Auth;
-use App\Horario;
+use App\User;
 
 class VehicleController extends Controller
 {
@@ -23,8 +23,10 @@ class VehicleController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $vehicles = Vehicle::orderByDesc("id")->paginate(10);
-        return view('vehicles.index', compact('vehicles'));
+        return view('vehicles.index', compact('vehicles', 'users'));
 
     }
 

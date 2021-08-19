@@ -33,6 +33,9 @@
                             <th>Apellidos</th>
                             <th>DNI</th>
                             <th>Fecha de ingreso</th>
+                            @if (Auth::user()->role_id == 1)
+                                <th>Registrado por</th>
+                            @endif
                             <th>Fecha de salida</th>
                             <th>Observación</th>
                             <th>Estado</th>
@@ -46,6 +49,9 @@
                                 <td>{{$item->apellidos}}</td>
                                 <td>{{$item->dni}}</td>
                                 <td>{{$item->created_at->format('d/m/Y h:i A')}}</td>
+                                @if (Auth::user()->role_id == 1)
+                                    <td>{{$users->find($item->login_id)->name}}</td>
+                                @endif
                                 <td>
                                     @if ($item->estado == 0)
                                         <span class="label label-warning">Pendiente</span>                                  
