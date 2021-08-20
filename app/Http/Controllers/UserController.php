@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 
 
 
@@ -130,7 +132,19 @@ class UserController extends Controller
     public function destroy(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        
+        if($user->user_photo != null){
+            
+            $file_path = public_path().'/img/'.$user->user_photo;
+            
+            File::delete($file_path);
+        }
+        
+        
         $user->delete();
+        
+
+
         return redirect('/user');
     }
 

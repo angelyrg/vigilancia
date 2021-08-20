@@ -39,7 +39,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="/offices/{{$office->id}}/historialOficinas" class="btn btn-success"><i class="fa fa-list"></i> Historial</a>
+                                <a href="/offices/{{$office->id}}/historialOficinas" class="btn btn-success"><i class="fa fa-list"></i> Historial de visitantes</a>
                             </td>
                         </tr>
                             

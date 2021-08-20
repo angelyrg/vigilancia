@@ -83,9 +83,10 @@ class OfficeController extends Controller
 
         //$visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->get();
         $visitors = Visitor::where('oficina_id', $id)->orderBy('created_at', 'desc')->paginate(5);
-        //return $visitors;
-
         return view('offices.historial', compact('visitors', 'office'));
+        
+
+
     }
 
 }

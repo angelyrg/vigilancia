@@ -11,8 +11,68 @@
     </ol>
 </section>
 
+
+
 <section class="content">
     <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">               
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{$vehicule_cant}}</h3>
+        
+                        <p>Vehículos registrados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-car"></i>
+                    </div>
+                    <a href="/vehicles" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">               
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{$incident_cant}}</h3>
+        
+                        <p>Incidentes registrados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-grav"></i>
+                    </div>
+                    <a href="/incidents" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">               
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{$borrowing_cant}}</h3>
+        
+                        <p>Préstamos registrados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-object-group"></i>
+                    </div>
+                    <a href="/borrowings" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">               
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{$support_cant}}</h3>
+        
+                        <p>Apoyos realizados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <a href="/supports" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
     
         <div class="row">
             <div class="col-md-8">

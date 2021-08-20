@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Borrowing;
+use App\Incident;
 use App\Office;
+use App\Support;
 use App\Visitor;
+use App\Vehicle;
 
 
 
@@ -27,7 +31,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $vehicule_cant = Vehicle::count();
+        $incident_cant = Incident::count();
+        $borrowing_cant = Borrowing::count();
+        $support_cant = Support::count();
+
+
+
+
+        return view('home', compact('vehicule_cant', 'incident_cant', 'borrowing_cant', 'support_cant' ));
     }
 
 

@@ -3,8 +3,16 @@
 @section('content')
 <div class="container">
 
+    
     <h3>Gestión de Horarios</h3>
     <hr>
+        @if (Session::has('message') )
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> !</h4>
+                {{ Session::get("message")}}
+            </div>
+        @endif
     <div class="box">
         <div class="box-header"><h3 class="box-title">Horarios</h3> </div>
         <div class="box-body">
@@ -40,7 +48,7 @@
                                     @endforeach
                                     
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
-                                        <i class="fa fa-plus"></i> {{$contador}}
+                                        <i class="fa fa-plus"></i>
                                     </button>
                                 </td>
 
@@ -94,8 +102,7 @@
                                     @endforeach
                                     
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add{{$contador}}">
-                                        <i class="fa fa-plus"></i> {{$contador}}
-                                        
+                                        <i class="fa fa-plus"></i>                                        
                                     </button>
                                 </td>
 

@@ -47,7 +47,7 @@ class AttendanceController extends Controller
 
             if ( date('Y-m-d', strtotime($misAsistencias->created_at )) == date('Y-m-d') && $misAsistencias->estado ==1){
     
-                return redirect('/attendance')->with('message', 'Usted ya ha registrado su salida de hoy');
+                return redirect('/attendance')->with('message', 'Usted ya ha registrado de este turno');
     
             }
 

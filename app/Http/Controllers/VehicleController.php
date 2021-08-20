@@ -49,20 +49,24 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request; 
         $validatedData = $request->validate([
             'placa' => 'required|string|max:7|min:7',
-            'conductor' => 'required|string|max:150',
-            'dni_conductor' => 'required|numeric|digits:8',
+            'nombres' => 'required|string|max:150',
+            'apellidos' => 'required|string|max:150',
+            'dni' => 'required|numeric|digits:8',
             'tipo_vehiculo' => 'required|string|max:50',
             'color' => 'required|string|max:25',
             'motivo' => 'required|string',
             'propiedad_epis' => 'required|numeric|min:0|max:1', 
         ]);
 
+
+
         $vehicle = new Vehicle;
         $vehicle->placa = $validatedData['placa'];
-        $vehicle->conductor = $validatedData['conductor'];
-        $vehicle->dni_conductor = $validatedData['dni_conductor'];
+        $vehicle->conductor = $validatedData['nombres']." ".$validatedData['apellidos'];
+        $vehicle->dni_conductor = $validatedData['dni'];
         $vehicle->tipo_vehiculo = $validatedData['tipo_vehiculo'];
         $vehicle->color = $validatedData['color'];
         $vehicle->motivo = $validatedData['motivo'];

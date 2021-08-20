@@ -27,17 +27,23 @@ class HorarioController extends Controller
 
     public function store(Request $request)
     {
-        //$horariosDelUsuario = Horario::findOrFail($request->user_id);
-
+        
         $validatedData = $request->validate([
             'user_id' => 'required|numeric',
             'turno' => 'required|numeric',
-            // 'turno' => ['required', 'numeric',
-            //     function ($attribute, $value, $fail){
-            //         if ( $value + 1 == $horarios->)
-            //     }
-            //
         ]);
+
+        $horariosDelUsuario = Horario::where('user_id', $validatedData['user_id'])->get()  ;
+        
+        foreach ($horariosDelUsuario as $hs) {
+            if ($validatedData['turno'] == $hs->turno ){
+                
+                return redirect('/horario')->with('message', 'El vigilante ya tiene asignado este turno.');
+            }else if ($validatedData['turno'] == ($hs->turno + 1 ) || $validatedData['turno'] == ($hs->turno - 1 )){
+                
+                return redirect('/horario')->with('message', 'No se puede asignar dos turnos consecutivos al mismo vigilante');
+            }
+        }
 
         $horario = new Horario;
         $horario->user_id = $validatedData['user_id'];
