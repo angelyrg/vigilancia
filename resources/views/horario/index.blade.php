@@ -1,9 +1,6 @@
 @extends('layouts.adminlte')
-
 @section('content')
 <div class="container">
-
-    
     <h3>Gestión de Horarios</h3>
     <hr>
         @if (Session::has('message') )
@@ -17,7 +14,6 @@
         <div class="box-header"><h3 class="box-title">Horarios</h3> </div>
         <div class="box-body">
             <div class="table table-responsive">
-
                 <table class="table">
                     <thead class="bg-light-blue  color-palette">
                         <tr>
@@ -28,12 +24,9 @@
                     </thead>
                     <tbody>
                         @php $contador = 1; @endphp
-
                         @foreach ($dias as $dia)
-
                             <tr>
                                 <td>{{$dia}}</td>
-
                                 <td>
                                     @foreach ($horarios as $item)
                                         @if ($item->turno == $contador)

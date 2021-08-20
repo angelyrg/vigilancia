@@ -117,11 +117,26 @@ class UserController extends Controller
         $user->contract_start = $validatedData['contract_start'];
         $user->contract_end = $validatedData['contract_end'];
 
-        $user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar si esta línea está comentada
+        //$user->password = bcrypt($validatedData['dni']); //No guarda nueva contraseña al actualizar si esta línea está comentada
+
         $user->save();
 
         return redirect('/user');
     }
+
+
+    public function restablecerpass( $id)
+    {
+        
+        $user = User::findOrFail($id);
+
+        $user->password = bcrypt( $user->dni); 
+
+        $user->save();
+
+        return redirect('/user')->with('message','Contraseña rstablecida al número de DNI del vigilante');
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -12,6 +12,15 @@
         <li class="active">Usuarios</li>
     </ol>
 </section>
+
+@if (Session::has('message') )
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-ban"></i> Éxito !</h4>
+    {{ Session::get("message")}}
+</div>
+@endif
+
   
 <div class="container-fluid">
     <div class="container-fluid row text-right">        
@@ -73,6 +82,8 @@
                                         <span class="label label-default">Contrato caducado</span>                                        
                                     @endif
                                 </td>
+                                <td><a href="/user/{{$user->id}}/restablecerpass" class="btn btn-info btn-sm"><i class="fa fa-key"></i> Restablecer contraseña</a></td>
+
                                 <td><a href="/user/{{$user->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="/user/{{$user->id}}/confirmDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>                    
                             </tr>

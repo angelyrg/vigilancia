@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('login');
 });
 
 Auth::routes();
@@ -26,6 +26,7 @@ Route::put('/profile/{id}/changePassword', 'ProfileController@changePassword');
 Route::resource('/user', 'UserController'); 
 
 Route::get('/user/{id}/confirmDelete', 'UserController@confirmDelete');
+Route::get('/user/{id}/restablecerpass', 'UserController@restablecerpass');
 
 
 Route::resource('/horario', 'HorarioController');
